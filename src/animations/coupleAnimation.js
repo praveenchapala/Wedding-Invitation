@@ -9,95 +9,143 @@ export function createCoupleAnimation(section) {
   }
 
   const context = gsap.context(() => {
-    const bride = section.querySelector(
-      ".couple-bride"
-    );
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
-    const groom = section.querySelector(
-      ".couple-groom"
-    );
+    const bride = section.querySelector(".couple-bride");
 
-    const garland = section.querySelector(
-      ".couple-garland"
-    );
+    const groom = section.querySelector(".couple-groom");
 
-    const content = section.querySelector(
-      ".couple-content"
-    );
+    const garland = section.querySelector(".couple-garland");
 
-    const glow = section.querySelector(
-      ".couple-glow"
-    );
+    const content = section.querySelector(".couple-content");
 
-    const particles = section.querySelector(
-      ".couple-particles"
-    );
+    const glow = section.querySelector(".couple-glow");
+
+    const particles = section.querySelector(".couple-particles");
+
+    /* =====================================================
+       DEVICE CHECK
+    ===================================================== */
 
     const isMobile = window.matchMedia(
       "(max-width: 768px)"
     ).matches;
 
     /* =====================================================
-       INITIAL STATE
+       INITIAL STATES
     ===================================================== */
 
+    /*
+      Bride starts outside the left side.
+    */
+
     gsap.set(bride, {
-      xPercent: -110,
+      xPercent: -120,
       opacity: 0,
     });
+
+    /*
+      Groom starts outside the right side.
+    */
 
     gsap.set(groom, {
-      xPercent: 110,
+      xPercent: 120,
       opacity: 0,
     });
 
+    /*
+      Garland starts small and slightly below.
+    */
+
     gsap.set(garland, {
-      scale: 0.6,
+      xPercent: -50,
+      scale: 0.5,
       opacity: 0,
       y: 30,
     });
+
+    /*
+      Text starts slightly below.
+    */
 
     gsap.set(content, {
       opacity: 0,
       y: 40,
     });
 
+    /*
+      Glow starts invisible.
+    */
+
     gsap.set(glow, {
       opacity: 0,
       scale: 0.6,
     });
+
+    /*
+      Particles start invisible.
+    */
 
     gsap.set(particles, {
       opacity: 0,
     });
 
     /* =====================================================
-       ENTRANCE TIMELINE
+       MAIN SCROLL TIMELINE
     ===================================================== */
 
-    const entrance = gsap.timeline({
+    const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: section,
 
-        start: "top 80%",
+        start: "top top",
 
-        end: "top 20%",
+        /*
+          Give mobile enough scroll distance for the
+          characters to visibly move toward each other.
+        */
+
+        end: isMobile
+          ? "+=180%"
+          : "+=160%",
 
         scrub: 1,
+
+        pin: true,
+
+        anticipatePin: 1,
 
         invalidateOnRefresh: true,
       },
     });
 
     /* =====================================================
-       BRIDE ENTERS FROM LEFT
+       PHASE 1
+       CHARACTERS ENTER
     ===================================================== */
 
-    entrance.to(
+    timeline.to(
       bride,
       {
         xPercent: 0,
         opacity: 1,
+
+        duration: 0.35,
+
+        ease: "power3.out",
+      },
+      0
+    );
+
+    timeline.to(
+      groom,
+      {
+        xPercent: 0,
+        opacity: 1,
+
+        duration: 0.35,
 
         ease: "power3.out",
       },
@@ -105,29 +153,55 @@ export function createCoupleAnimation(section) {
     );
 
     /* =====================================================
-       GROOM ENTERS FROM RIGHT
+       PHASE 2
+       COUPLE MOVES CLOSER
     ===================================================== */
 
-    entrance.to(
+    /*
+      Desktop:
+      Move them moderately toward the center.
+
+      Mobile:
+      Give them a stronger inward movement because
+      the characters start much farther apart visually.
+    */
+
+    timeline.to(
+      bride,
+      {
+        xPercent: isMobile ? 22 : 18,
+
+        duration: 0.45,
+
+        ease: "power2.inOut",
+      },
+      0.35
+    );
+
+    timeline.to(
       groom,
       {
-        xPercent: 0,
-        opacity: 1,
+        xPercent: isMobile ? -22 : -18,
 
-        ease: "power3.out",
+        duration: 0.45,
+
+        ease: "power2.inOut",
       },
-      0
+      0.35
     );
 
     /* =====================================================
        GOLDEN GLOW
     ===================================================== */
 
-    entrance.to(
+    timeline.to(
       glow,
       {
         opacity: 1,
+
         scale: 1,
+
+        duration: 0.35,
 
         ease: "power2.out",
       },
@@ -138,10 +212,12 @@ export function createCoupleAnimation(section) {
        PARTICLES
     ===================================================== */
 
-    entrance.to(
+    timeline.to(
       particles,
       {
         opacity: 1,
+
+        duration: 0.3,
 
         ease: "power2.out",
       },
@@ -152,38 +228,44 @@ export function createCoupleAnimation(section) {
        GARLAND REVEAL
     ===================================================== */
 
-    entrance.to(
+    timeline.to(
       garland,
       {
-        scale: isMobile ? 0.72 : 0.85,
+        scale: isMobile ? 0.78 : 0.85,
 
         opacity: 1,
 
         y: 0,
 
+        duration: 0.3,
+
         ease: "back.out(1.4)",
       },
-      0.45
+      0.62
     );
 
     /* =====================================================
        TEXT REVEAL
     ===================================================== */
 
-    entrance.to(
+    timeline.to(
       content,
       {
         opacity: 1,
 
         y: 0,
 
+        duration: 0.3,
+
         ease: "power3.out",
       },
-      0.6
+      0.72
     );
 
     /* =====================================================
-       SUBTLE COUPLE FLOAT
+       AMBIENT FLOATING
+       
+       These run continuously after the scroll animation.
     ===================================================== */
 
     gsap.to(bride, {
@@ -209,10 +291,6 @@ export function createCoupleAnimation(section) {
 
       ease: "sine.inOut",
     });
-
-    /* =====================================================
-       GARLAND FLOAT
-    ===================================================== */
 
     gsap.to(garland, {
       y: -5,

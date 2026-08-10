@@ -35,9 +35,34 @@ export function createTempleAnimation(section) {
     ).matches;
 
     /* =====================================================
+       INITIAL STATES
+    ===================================================== */
+
+    gsap.set(artwork, {
+      xPercent: -50,
+      yPercent: -50,
+      scale: 1,
+    });
+
+    /*
+      IMPORTANT:
+      Do NOT animate x on the content.
+
+      The content is horizontally centered using:
+      left: 50%
+      transform: translateX(-50%)
+
+      GSAP will only animate y and opacity.
+    */
+
+    gsap.set(content, {
+      xPercent: -50,
+      y: 0,
+      opacity: 1,
+    });
+
+    /* =====================================================
        AMBIENT BELL ANIMATION
-       
-       These animations run continuously before/during scroll.
     ===================================================== */
 
     gsap.to(leftBell, {
@@ -124,8 +149,13 @@ export function createTempleAnimation(section) {
     timeline.to(
       artwork,
       {
+        yPercent: -50,
+        xPercent: -50,
+
         y: isMobile ? -70 : -140,
+
         scale: isMobile ? 1.16 : 1.12,
+
         ease: "none",
       },
       0
@@ -133,13 +163,20 @@ export function createTempleAnimation(section) {
 
     /* =====================================================
        TEXT MOVEMENT
+
+       IMPORTANT:
+       xPercent remains -50 so the content stays centered.
     ===================================================== */
 
     timeline.to(
       content,
       {
+        xPercent: -50,
+
         y: isMobile ? -90 : -150,
+
         opacity: 0,
+
         ease: "none",
       },
       0
@@ -153,20 +190,23 @@ export function createTempleAnimation(section) {
       overlay,
       {
         opacity: 0.85,
+
         ease: "none",
       },
       0
     );
 
     /* =====================================================
-       BELLS MOVE WITH SCROLL
+       BELLS
     ===================================================== */
 
     timeline.to(
       leftBell,
       {
         y: isMobile ? -50 : -90,
+
         rotation: -5,
+
         ease: "none",
       },
       0
@@ -176,21 +216,25 @@ export function createTempleAnimation(section) {
       rightBell,
       {
         y: isMobile ? -40 : -80,
+
         rotation: 5,
+
         ease: "none",
       },
       0
     );
 
     /* =====================================================
-       FLOWERS MOVE WITH SCROLL
+       FLOWERS
     ===================================================== */
 
     timeline.to(
       leftFlowers,
       {
         y: isMobile ? -35 : -70,
+
         opacity: 0,
+
         ease: "none",
       },
       0
@@ -200,21 +244,25 @@ export function createTempleAnimation(section) {
       rightFlowers,
       {
         y: isMobile ? -35 : -70,
+
         opacity: 0,
+
         ease: "none",
       },
       0
     );
 
     /* =====================================================
-       DIYA MOVES WITH SCROLL
+       DIYA
     ===================================================== */
 
     timeline.to(
       diya,
       {
         y: isMobile ? -25 : -50,
+
         opacity: 0,
+
         ease: "none",
       },
       0

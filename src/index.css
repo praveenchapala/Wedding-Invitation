@@ -66,6 +66,10 @@ body {
   padding: 0;
 }
 
+/* =========================================================
+   MEDIA ELEMENTS
+========================================================= */
+
 img,
 picture,
 video,
@@ -74,6 +78,10 @@ svg {
   display: block;
   max-width: 100%;
 }
+
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
 
 button,
 input,
@@ -85,6 +93,10 @@ select {
 button {
   border: 0;
 }
+
+/* =========================================================
+   LINKS
+========================================================= */
 
 a {
   color: inherit;
@@ -169,7 +181,7 @@ a {
 
   object-fit: cover;
 
-  transform: translate(-50%, -50%) scale(1.02);
+  transform: translate3d(-50%, -50%, 0) scale(1.02);
 
   will-change: transform;
 }
@@ -217,7 +229,7 @@ a {
 
   pointer-events: none;
 
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 /* =========================================================
@@ -236,7 +248,7 @@ a {
 
   filter:
     drop-shadow(0 8px 15px rgba(0, 0, 0, 0.45))
-    drop-shadow(0 0 10px rgba(212, 164, 72, 0.20));
+    drop-shadow(0 0 10px rgba(212, 164, 72, 0.2));
 }
 
 .temple-bell-left {
@@ -270,7 +282,7 @@ a {
   object-fit: contain;
 
   filter:
-    drop-shadow(0 8px 14px rgba(0, 0, 0, 0.40));
+    drop-shadow(0 8px 14px rgba(0, 0, 0, 0.4));
 }
 
 .temple-flowers-left {
@@ -311,21 +323,34 @@ a {
 
 /* =========================================================
    HERO CONTENT
+   IMPORTANT:
+   Explicitly centered so GSAP vertical animation cannot
+   push the content horizontally outside the viewport.
 ========================================================= */
 
 .temple-content {
-  position: relative;
+  position: absolute;
 
   z-index: 2;
 
-  width: 90%;
+  left: 50%;
+  top: 50%;
+
+  width: min(90%, 1200px);
   max-width: 1200px;
   min-width: 0;
 
-  margin: 0 auto;
+  margin: 0;
+
   padding: 2rem;
 
   text-align: center;
+
+  transform: translate3d(-50%, -50%, 0);
+
+  overflow: hidden;
+
+  pointer-events: none;
 }
 
 /* =========================================================
@@ -604,7 +629,6 @@ a {
   position: absolute;
 
   left: 3%;
-
   bottom: 0;
 
   z-index: 3;
@@ -641,7 +665,6 @@ a {
   position: absolute;
 
   right: 3%;
-
   bottom: 0;
 
   z-index: 3;
@@ -753,42 +776,49 @@ a {
 .couple-particles span:nth-child(2) {
   left: 22%;
   top: 55%;
+
   animation-delay: 1s;
 }
 
 .couple-particles span:nth-child(3) {
   left: 35%;
   top: 30%;
+
   animation-delay: 2s;
 }
 
 .couple-particles span:nth-child(4) {
   left: 48%;
   top: 70%;
+
   animation-delay: 0.5s;
 }
 
 .couple-particles span:nth-child(5) {
   right: 18%;
   top: 28%;
+
   animation-delay: 1.5s;
 }
 
 .couple-particles span:nth-child(6) {
   right: 30%;
   top: 60%;
+
   animation-delay: 2.5s;
 }
 
 .couple-particles span:nth-child(7) {
   right: 10%;
   top: 42%;
+
   animation-delay: 3s;
 }
 
 .couple-particles span:nth-child(8) {
   left: 60%;
   top: 20%;
+
   animation-delay: 1.2s;
 }
 
@@ -861,7 +891,7 @@ a {
 
 @media (max-width: 1024px) {
   .temple-content {
-    width: 92%;
+    width: min(92%, 1000px);
 
     padding: 1.5rem;
   }
@@ -871,12 +901,12 @@ a {
   }
 
   .temple-image {
-    transform: translate(-50%, -50%) scale(1.05);
+    transform:
+      translate3d(-50%, -50%, 0)
+      scale(1.05);
   }
 
-  /* -------------------------------------------------------
-     Couple Tablet
-  ------------------------------------------------------- */
+  /* Couple Tablet */
 
   .couple-bride {
     width: clamp(
@@ -912,14 +942,18 @@ a {
 
   .temple-image {
     width: auto;
+
     min-width: 100%;
+
     height: 100%;
 
     max-width: none;
 
     object-fit: cover;
 
-    transform: translate(-50%, -50%) scale(1.04);
+    transform:
+      translate3d(-50%, -50%, 0)
+      scale(1.04);
   }
 
   /* -------------------------------------------------------
@@ -990,20 +1024,39 @@ a {
 
   /* -------------------------------------------------------
      Mobile Temple Content
+     
+     Explicit centering prevents horizontal overflow.
   ------------------------------------------------------- */
 
   .temple-content {
-    width: 100%;
+    left: 50%;
+    top: 50%;
+
+    width: calc(100% - 2rem);
+
     max-width: 100%;
 
     padding: 1rem;
+
+    transform:
+      translate3d(-50%, -50%, 0);
+
+    overflow: hidden;
   }
+
+  /* Sanskrit */
 
   .sanskrit {
     margin-bottom: 1rem;
 
-    font-size: clamp(1rem, 4vw, 1.4rem);
+    font-size: clamp(
+      1rem,
+      4vw,
+      1.4rem
+    );
   }
+
+  /* Blessing */
 
   .blessing {
     width: 100%;
@@ -1013,19 +1066,33 @@ a {
     margin-bottom: 1rem;
     margin-left: auto;
 
-    font-size: clamp(0.95rem, 3.8vw, 1.2rem);
+    font-size: clamp(
+      0.95rem,
+      3.8vw,
+      1.2rem
+    );
 
     line-height: 1.5;
   }
+
+  /* Main title */
 
   .temple-content h1 {
     width: 100%;
     max-width: 100%;
 
-    font-size: clamp(2.2rem, 12vw, 4.5rem);
+    font-size: clamp(
+      2.2rem,
+      12vw,
+      4.5rem
+    );
 
     line-height: 1.05;
+
+    text-wrap: balance;
   }
+
+  /* Scroll text */
 
   .scroll-text {
     margin-top: 2.8rem;
@@ -1052,9 +1119,11 @@ a {
   ----------------------------------------------------- */
 
   .couple-content {
-    top: 9%;
+    top: 7%;
 
     width: 92%;
+
+    max-width: 600px;
   }
 
   .couple-eyebrow {
@@ -1067,9 +1136,9 @@ a {
 
   .couple-content h2 {
     font-size: clamp(
-      2rem,
-      9vw,
-      3.2rem
+      1.9rem,
+      8vw,
+      3rem
     );
 
     line-height: 1.08;
@@ -1084,11 +1153,11 @@ a {
   ----------------------------------------------------- */
 
   .couple-bride {
-    left: -8%;
+    left: -4%;
 
-    width: 58vw;
+    width: 63vw;
 
-    max-width: 280px;
+    max-width: 300px;
   }
 
   /* -----------------------------------------------------
@@ -1096,11 +1165,11 @@ a {
   ----------------------------------------------------- */
 
   .couple-groom {
-    right: -8%;
+    right: -4%;
 
-    width: 58vw;
+    width: 63vw;
 
-    max-width: 280px;
+    max-width: 300px;
   }
 
   /* -----------------------------------------------------
@@ -1108,9 +1177,9 @@ a {
   ----------------------------------------------------- */
 
   .couple-garland {
-    top: 48%;
+    top: 43%;
 
-    width: 90px;
+    width: 110px;
   }
 
   /* -----------------------------------------------------
@@ -1131,7 +1200,11 @@ a {
 
     padding: 1.25rem;
 
-    font-size: clamp(2rem, 10vw, 4rem);
+    font-size: clamp(
+      2rem,
+      10vw,
+      4rem
+    );
   }
 }
 
@@ -1144,8 +1217,12 @@ a {
     padding: 0.5rem;
   }
 
+  /* Temple */
+
   .temple-image {
-    transform: translate(-50%, -50%) scale(1.06);
+    transform:
+      translate3d(-50%, -50%, 0)
+      scale(1.06);
   }
 
   .temple-bell {
@@ -1161,9 +1238,15 @@ a {
   }
 
   .temple-content {
-    width: 100%;
+    left: 50%;
+    top: 50%;
+
+    width: calc(100% - 1rem);
 
     padding: 0.5rem;
+
+    transform:
+      translate3d(-50%, -50%, 0);
   }
 
   .sanskrit {
@@ -1175,7 +1258,11 @@ a {
   }
 
   .temple-content h1 {
-    font-size: clamp(2rem, 11vw, 3.3rem);
+    font-size: clamp(
+      2rem,
+      11vw,
+      3.3rem
+    );
   }
 
   .scroll-text {
@@ -1191,7 +1278,9 @@ a {
   ===================================================== */
 
   .couple-content {
-    top: 8%;
+    top: 7%;
+
+    width: 92%;
   }
 
   .couple-eyebrow {
@@ -1203,19 +1292,25 @@ a {
   }
 
   .couple-bride {
-    left: -13%;
+    left: -7%;
 
-    width: 60vw;
+    width: 64vw;
+
+    max-width: 285px;
   }
 
   .couple-groom {
-    right: -13%;
+    right: -7%;
 
-    width: 60vw;
+    width: 64vw;
+
+    max-width: 285px;
   }
 
   .couple-garland {
-    width: 76px;
+    top: 43%;
+
+    width: 90px;
   }
 }
 
@@ -1225,7 +1320,15 @@ a {
 
 @media (max-width: 350px) {
   .temple-content {
+    left: 50%;
+    top: 50%;
+
+    width: calc(100% - 0.5rem);
+
     padding: 0.25rem;
+
+    transform:
+      translate3d(-50%, -50%, 0);
   }
 
   .sanskrit {
@@ -1261,7 +1364,7 @@ a {
   ------------------------------------------------------- */
 
   .couple-content {
-    top: 7%;
+    top: 6%;
   }
 
   .couple-eyebrow {
@@ -1275,19 +1378,25 @@ a {
   }
 
   .couple-bride {
-    left: -18%;
+    left: -13%;
 
-    width: 63vw;
+    width: 65vw;
+
+    max-width: 240px;
   }
 
   .couple-groom {
-    right: -18%;
+    right: -13%;
 
-    width: 63vw;
+    width: 65vw;
+
+    max-width: 240px;
   }
 
   .couple-garland {
-    width: 68px;
+    top: 42%;
+
+    width: 78px;
   }
 }
 

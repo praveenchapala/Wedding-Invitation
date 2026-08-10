@@ -21,40 +21,28 @@ function WeddingTimeline() {
 
       <div className="timeline-background" />
 
-      {/* =================================================
-          CENTER GLOW
-      ================================================= */}
-
       <div className="timeline-glow" />
 
       {/* =================================================
-          FLOATING PARTICLES
+          DECORATIVE LIGHTS
       ================================================= */}
 
-      <div className="timeline-particles">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
+      <div className="timeline-light timeline-light-left" />
+      <div className="timeline-light timeline-light-right" />
 
       {/* =================================================
-          SECTION HEADER
+          HEADER
       ================================================= */}
 
       <div className="timeline-header">
         <p className="timeline-eyebrow">
-          The Celebration
+          Mark Your Calendar
         </p>
 
         <h2>
-          Two Days,
+          The Celebration
           <br />
-          One Beautiful Beginning
+          Begins
         </h2>
 
         <div className="timeline-divider">
@@ -65,23 +53,24 @@ function WeddingTimeline() {
       </div>
 
       {/* =================================================
-          EVENTS WRAPPER
+          TIMELINE AREA
       ================================================= */}
 
       <div className="timeline-events">
+
+        {/* -------------------------------------------------
+            CENTER LINE
+        ------------------------------------------------- */}
+
+        <div className="timeline-line" />
 
         {/* =================================================
             RECEPTION
         ================================================= */}
 
-        <article className="timeline-event timeline-reception">
-          <div className="event-card">
-
-            <div className="event-symbol">
-              ✦
-            </div>
-
-            <p className="event-label">
+        <article className="timeline-event timeline-event-reception">
+          <div className="timeline-card">
+            <p className="timeline-event-label">
               The Celebration Begins
             </p>
 
@@ -89,80 +78,65 @@ function WeddingTimeline() {
               Wedding Reception
             </h3>
 
-            <div className="event-date">
-              <span className="event-day">
-                25
-              </span>
+            <div className="timeline-details">
+              <p>
+                <span>25</span>
+                <span>August 2026</span>
+              </p>
 
-              <span className="event-month">
-                August 2026
-              </span>
-
-              <span className="event-weekday">
+              <p>
                 Tuesday
-              </span>
-            </div>
+              </p>
 
-            <div className="event-time">
-              7:30 PM onwards
+              <p>
+                7:30 PM onwards
+              </p>
             </div>
+          </div>
 
+          {/* Timeline marker */}
+          <div className="timeline-marker">
+            <span>✦</span>
           </div>
         </article>
-
-        {/* =================================================
-            CONNECTING LINE
-        ================================================= */}
-
-        <div className="timeline-connector">
-          <span className="connector-line" />
-          <span className="connector-symbol">
-            ॐ
-          </span>
-          <span className="connector-line" />
-        </div>
 
         {/* =================================================
             MUHURTHAM
         ================================================= */}
 
-        <article className="timeline-event timeline-muhurtham">
-          <div className="event-card">
-
-            <div className="event-symbol">
-              ✦
-            </div>
-
-            <p className="event-label">
+        <article className="timeline-event timeline-event-muhurtham">
+          <div className="timeline-card">
+            <p className="timeline-event-label">
               The Sacred Beginning
             </p>
 
             <h3>
-              Muhurtham
+              Muhūrtham
             </h3>
 
-            <div className="event-date">
-              <span className="event-day">
-                26
-              </span>
+            <div className="timeline-details">
+              <p>
+                <span>26</span>
+                <span>August 2026</span>
+              </p>
 
-              <span className="event-month">
-                August 2026
-              </span>
-
-              <span className="event-weekday">
+              <p>
                 Wednesday
-              </span>
+              </p>
+
+              <p>
+                10:05 AM — 11:00 AM
+              </p>
+
+              <p className="timeline-special">
+                Subha Tula Lagnam
+              </p>
             </div>
+          </div>
 
-            <div className="event-time">
-              10:05 AM — 11:00 AM
-            </div>
-
-            <p className="event-auspicious">
-              Subha Tula Lagnam
-            </p>
-
+          {/* Timeline marker */}
+          <div className="timeline-marker">
+            <span>ॐ</span>
           </div>
         </article>
 
@@ -172,9 +146,8 @@ function WeddingTimeline() {
           VENUE
       ================================================= */}
 
-      <div className="timeline-venue">
-
-        <p className="venue-eyebrow">
+      <article className="timeline-venue">
+        <p className="timeline-event-label">
           The Wedding Venue
         </p>
 
@@ -182,22 +155,32 @@ function WeddingTimeline() {
           Vanshika Grand
         </h3>
 
-        <p className="venue-address">
+        <div className="timeline-venue-divider">
+          <span />
+          <strong>✦</strong>
+          <span />
+        </div>
+
+        <p>
           Function Hall,
           <br />
           Ganesh Hall Complex,
           <br />
           Penukonda
         </p>
+      </article>
 
-        <div className="venue-divider">
-          <span />
-          <strong>✦</strong>
-          <span />
-        </div>
+      {/* =================================================
+          BOTTOM MESSAGE
+      ================================================= */}
 
+      <div className="timeline-bottom">
+        <p>
+          Two moments.
+          <br />
+          One beautiful beginning.
+        </p>
       </div>
-
     </section>
   );
 }

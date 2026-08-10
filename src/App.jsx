@@ -3,11 +3,11 @@ import CoupleReveal from "./components/CoupleReveal";
 import GarlandCeremony from "./components/GarlandCeremony";
 import WeddingCeremony from "./components/WeddingCeremony";
 import Countdown from "./components/Countdown";
+import WeddingTimeline from "./components/WeddingTimeline";
 
 function App() {
   return (
-    <div className="wedding-page">
-
+    <div className="app">
       {/* =================================================
           SECTION 1 — TEMPLE HERO
       ================================================= */}
@@ -38,6 +38,11 @@ function App() {
 
       <Countdown />
 
+      {/* =================================================
+          SECTION 6 — WEDDING TIMELINE
+      ================================================= */}
+
+      <WeddingTimeline />
     </div>
   );
 }

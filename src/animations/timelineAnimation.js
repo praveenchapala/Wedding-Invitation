@@ -9,7 +9,6 @@ export function createTimelineAnimation(section) {
   }
 
   const context = gsap.context(() => {
-
     /* =====================================================
        ELEMENTS
     ===================================================== */
@@ -18,36 +17,32 @@ export function createTimelineAnimation(section) {
       ".timeline-header"
     );
 
+    const line = section.querySelector(
+      ".timeline-line"
+    );
+
     const reception = section.querySelector(
-      ".timeline-reception"
+      ".timeline-event-reception"
     );
 
     const muhurtham = section.querySelector(
-      ".timeline-muhurtham"
-    );
-
-    const connector = section.querySelector(
-      ".timeline-connector"
-    );
-
-    const connectorLine = section.querySelectorAll(
-      ".connector-line"
-    );
-
-    const connectorSymbol = section.querySelector(
-      ".connector-symbol"
+      ".timeline-event-muhurtham"
     );
 
     const venue = section.querySelector(
       ".timeline-venue"
     );
 
+    const bottom = section.querySelector(
+      ".timeline-bottom"
+    );
+
     const glow = section.querySelector(
       ".timeline-glow"
     );
 
-    const particles = section.querySelector(
-      ".timeline-particles"
+    const lights = section.querySelectorAll(
+      ".timeline-light"
     );
 
     const isMobile = window.matchMedia(
@@ -60,13 +55,12 @@ export function createTimelineAnimation(section) {
 
     if (
       !header ||
+      !line ||
       !reception ||
       !muhurtham ||
-      !connector ||
-      !connectorSymbol ||
       !venue ||
-      !glow ||
-      !particles
+      !bottom ||
+      !glow
     ) {
       return;
     }
@@ -80,30 +74,19 @@ export function createTimelineAnimation(section) {
       y: 50,
     });
 
+    gsap.set(line, {
+      scaleY: 0,
+      transformOrigin: "top center",
+    });
+
     gsap.set(reception, {
       opacity: 0,
-      x: isMobile ? 0 : -100,
-      y: isMobile ? 50 : 0,
+      x: isMobile ? -40 : -80,
     });
 
     gsap.set(muhurtham, {
       opacity: 0,
-      x: isMobile ? 0 : 100,
-      y: isMobile ? 50 : 0,
-    });
-
-    gsap.set(connector, {
-      opacity: 0,
-    });
-
-    gsap.set(connectorLine, {
-      scaleX: 0,
-      transformOrigin: "center center",
-    });
-
-    gsap.set(connectorSymbol, {
-      opacity: 0,
-      scale: 0.5,
+      x: isMobile ? 40 : 80,
     });
 
     gsap.set(venue, {
@@ -111,17 +94,22 @@ export function createTimelineAnimation(section) {
       y: 50,
     });
 
+    gsap.set(bottom, {
+      opacity: 0,
+      y: 30,
+    });
+
     gsap.set(glow, {
       opacity: 0,
       scale: 0.6,
     });
 
-    gsap.set(particles, {
+    gsap.set(lights, {
       opacity: 0,
     });
 
     /* =====================================================
-       MAIN SCROLL TIMELINE
+       SCROLL TIMELINE
     ===================================================== */
 
     const timeline = gsap.timeline({
@@ -131,8 +119,8 @@ export function createTimelineAnimation(section) {
         start: "top top",
 
         end: isMobile
-          ? "+=145%"
-          : "+=160%",
+          ? "+=170%"
+          : "+=155%",
 
         scrub: 0.8,
 
@@ -145,7 +133,6 @@ export function createTimelineAnimation(section) {
     });
 
     /* =====================================================
-       PHASE 1
        HEADER
     ===================================================== */
 
@@ -160,7 +147,6 @@ export function createTimelineAnimation(section) {
     );
 
     /* =====================================================
-       PHASE 2
        GOLDEN GLOW
     ===================================================== */
 
@@ -171,25 +157,36 @@ export function createTimelineAnimation(section) {
         scale: 1,
         ease: "power2.out",
       },
-      0.1
+      0.05
     );
 
     /* =====================================================
-       PHASE 3
-       PARTICLES
+       AMBIENT LIGHTS
     ===================================================== */
 
     timeline.to(
-      particles,
+      lights,
       {
         opacity: 1,
         ease: "power2.out",
       },
-      0.15
+      0.1
     );
 
     /* =====================================================
-       PHASE 4
+       TIMELINE LINE
+    ===================================================== */
+
+    timeline.to(
+      line,
+      {
+        scaleY: 1,
+        ease: "none",
+      },
+      0.2
+    );
+
+    /* =====================================================
        RECEPTION
     ===================================================== */
 
@@ -198,14 +195,12 @@ export function createTimelineAnimation(section) {
       {
         opacity: 1,
         x: 0,
-        y: 0,
         ease: "power3.out",
       },
       0.3
     );
 
     /* =====================================================
-       PHASE 5
        MUHURTHAM
     ===================================================== */
 
@@ -214,48 +209,12 @@ export function createTimelineAnimation(section) {
       {
         opacity: 1,
         x: 0,
-        y: 0,
         ease: "power3.out",
-      },
-      0.45
-    );
-
-    /* =====================================================
-       PHASE 6
-       CONNECTOR
-    ===================================================== */
-
-    timeline.to(
-      connector,
-      {
-        opacity: 1,
-        ease: "power2.out",
       },
       0.55
     );
 
-    timeline.to(
-      connectorLine,
-      {
-        scaleX: 1,
-        stagger: 0.1,
-        ease: "power2.inOut",
-      },
-      0.6
-    );
-
-    timeline.to(
-      connectorSymbol,
-      {
-        opacity: 1,
-        scale: 1,
-        ease: "back.out(1.5)",
-      },
-      0.68
-    );
-
     /* =====================================================
-       PHASE 7
        VENUE
     ===================================================== */
 
@@ -266,7 +225,21 @@ export function createTimelineAnimation(section) {
         y: 0,
         ease: "power3.out",
       },
-      0.82
+      0.8
+    );
+
+    /* =====================================================
+       BOTTOM MESSAGE
+    ===================================================== */
+
+    timeline.to(
+      bottom,
+      {
+        opacity: 1,
+        y: 0,
+        ease: "power3.out",
+      },
+      1
     );
 
     /* =====================================================
@@ -286,73 +259,31 @@ export function createTimelineAnimation(section) {
     });
 
     /* =====================================================
-       AMBIENT CONNECTOR SYMBOL
+       LIGHT FLOAT
     ===================================================== */
 
-    gsap.to(connectorSymbol, {
-      rotation: 5,
+    lights.forEach((light, index) => {
+      gsap.to(light, {
+        y: index === 0 ? -15 : -10,
 
-      duration: 3,
+        x: index === 0 ? 8 : -8,
 
-      repeat: -1,
+        duration: 3 + index * 0.5,
 
-      yoyo: true,
+        repeat: -1,
 
-      ease: "sine.inOut",
+        yoyo: true,
+
+        ease: "sine.inOut",
+      });
     });
-
-    /* =====================================================
-       PARTICLE MOTION
-    ===================================================== */
-
-    const particleElements =
-      section.querySelectorAll(
-        ".timeline-particles span"
-      );
-
-    particleElements.forEach(
-      (particle, index) => {
-        gsap.to(particle, {
-          y:
-            index % 2 === 0
-              ? -15
-              : 15,
-
-          x:
-            index % 2 === 0
-              ? 8
-              : -8,
-
-          opacity:
-            index % 2 === 0
-              ? 0.9
-              : 0.45,
-
-          duration:
-            3 + index * 0.25,
-
-          repeat: -1,
-
-          yoyo: true,
-
-          ease: "sine.inOut",
-
-          delay: index * 0.2,
-        });
-      }
-    );
 
     /* =====================================================
        REFRESH
     ===================================================== */
 
     ScrollTrigger.refresh();
-
   }, section);
-
-  /* =====================================================
-     CLEANUP
-  ===================================================== */
 
   return () => {
     context.revert();

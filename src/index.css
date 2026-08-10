@@ -422,6 +422,390 @@ a {
 }
 
 /* =========================================================
+   COUPLE REVEAL
+========================================================= */
+
+.couple-reveal {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #120404;
+
+  isolation: isolate;
+}
+
+/* =========================================================
+   COUPLE BACKGROUND
+========================================================= */
+
+.couple-background {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -3;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(135, 75, 25, 0.25) 0%,
+      rgba(65, 15, 15, 0.45) 35%,
+      #120404 75%
+    );
+}
+
+/* =========================================================
+   GOLDEN CENTER GLOW
+========================================================= */
+
+.couple-glow {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: min(70vw, 800px);
+  height: min(70vw, 800px);
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(238, 181, 72, 0.30) 0%,
+      rgba(190, 125, 35, 0.12) 35%,
+      transparent 70%
+    );
+
+  filter: blur(10px);
+
+  z-index: -2;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   COUPLE CONTENT
+========================================================= */
+
+.couple-content {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 50%;
+  top: 16%;
+
+  width: min(90%, 700px);
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+.couple-eyebrow {
+  margin-bottom: 1.2rem;
+
+  color: #d8ad5b;
+
+  font-size: clamp(
+    0.9rem,
+    1.8vw,
+    1.25rem
+  );
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  line-height: 1.5;
+}
+
+.couple-content h2 {
+  color: #f5d78c;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(
+    2rem,
+    5vw,
+    4.5rem
+  );
+
+  font-weight: 500;
+
+  line-height: 1.08;
+
+  text-wrap: balance;
+
+  text-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================================================
+   COUPLE DIVIDER
+========================================================= */
+
+.couple-divider {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  width: 180px;
+
+  margin: 1.8rem auto 0;
+
+  color: #d8ad5b;
+}
+
+.couple-divider span:first-child,
+.couple-divider span:last-child {
+  width: 55px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d8ad5b
+    );
+}
+
+.couple-divider span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      #d8ad5b,
+      transparent
+    );
+}
+
+/* =========================================================
+   BRIDE
+========================================================= */
+
+.couple-bride {
+  position: absolute;
+
+  left: 3%;
+
+  bottom: 0;
+
+  z-index: 3;
+
+  width: clamp(
+    240px,
+    32vw,
+    480px
+  );
+
+  transform-origin: bottom center;
+
+  will-change: transform, opacity;
+}
+
+.couple-bride img {
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 20px 30px
+      rgba(0, 0, 0, 0.55)
+    );
+}
+
+/* =========================================================
+   GROOM
+========================================================= */
+
+.couple-groom {
+  position: absolute;
+
+  right: 3%;
+
+  bottom: 0;
+
+  z-index: 3;
+
+  width: clamp(
+    240px,
+    32vw,
+    480px
+  );
+
+  transform-origin: bottom center;
+
+  will-change: transform, opacity;
+}
+
+.couple-groom img {
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 20px 30px
+      rgba(0, 0, 0, 0.55)
+    );
+}
+
+/* =========================================================
+   GARLAND
+========================================================= */
+
+.couple-garland {
+  position: absolute;
+
+  left: 50%;
+  top: 48%;
+
+  z-index: 4;
+
+  width: clamp(
+    100px,
+    12vw,
+    180px
+  );
+
+  transform: translateX(-50%);
+
+  will-change: transform, opacity;
+
+  pointer-events: none;
+}
+
+.couple-garland img {
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 12px 20px
+      rgba(0, 0, 0, 0.45)
+    );
+}
+
+/* =========================================================
+   COUPLE PARTICLES
+========================================================= */
+
+.couple-particles {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.couple-particles span {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #e5bb67;
+
+  box-shadow:
+    0 0 12px rgba(
+      229,
+      187,
+      103,
+      0.8
+    );
+
+  animation:
+    coupleParticleFloat
+    5s ease-in-out infinite;
+}
+
+.couple-particles span:nth-child(1) {
+  left: 12%;
+  top: 25%;
+}
+
+.couple-particles span:nth-child(2) {
+  left: 22%;
+  top: 55%;
+  animation-delay: 1s;
+}
+
+.couple-particles span:nth-child(3) {
+  left: 35%;
+  top: 30%;
+  animation-delay: 2s;
+}
+
+.couple-particles span:nth-child(4) {
+  left: 48%;
+  top: 70%;
+  animation-delay: 0.5s;
+}
+
+.couple-particles span:nth-child(5) {
+  right: 18%;
+  top: 28%;
+  animation-delay: 1.5s;
+}
+
+.couple-particles span:nth-child(6) {
+  right: 30%;
+  top: 60%;
+  animation-delay: 2.5s;
+}
+
+.couple-particles span:nth-child(7) {
+  right: 10%;
+  top: 42%;
+  animation-delay: 3s;
+}
+
+.couple-particles span:nth-child(8) {
+  left: 60%;
+  top: 20%;
+  animation-delay: 1.2s;
+}
+
+@keyframes coupleParticleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(-18px);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
    TEMPORARY SECOND SECTION
 ========================================================= */
 
@@ -488,6 +872,26 @@ a {
 
   .temple-image {
     transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  /* -------------------------------------------------------
+     Couple Tablet
+  ------------------------------------------------------- */
+
+  .couple-bride {
+    width: clamp(
+      220px,
+      34vw,
+      380px
+    );
+  }
+
+  .couple-groom {
+    width: clamp(
+      220px,
+      34vw,
+      380px
+    );
   }
 }
 
@@ -585,7 +989,7 @@ a {
   }
 
   /* -------------------------------------------------------
-     Mobile Content
+     Mobile Temple Content
   ------------------------------------------------------- */
 
   .temple-content {
@@ -630,6 +1034,97 @@ a {
 
     letter-spacing: 0.12em;
   }
+
+  /* =====================================================
+     COUPLE REVEAL - MOBILE
+  ===================================================== */
+
+  .couple-reveal {
+    min-height: 100svh;
+
+    padding: 1rem;
+
+    align-items: flex-end;
+  }
+
+  /* -----------------------------------------------------
+     Couple Content
+  ----------------------------------------------------- */
+
+  .couple-content {
+    top: 9%;
+
+    width: 92%;
+  }
+
+  .couple-eyebrow {
+    margin-bottom: 0.8rem;
+
+    font-size: 0.68rem;
+
+    letter-spacing: 0.12em;
+  }
+
+  .couple-content h2 {
+    font-size: clamp(
+      2rem,
+      9vw,
+      3.2rem
+    );
+
+    line-height: 1.08;
+  }
+
+  .couple-divider {
+    margin-top: 1.2rem;
+  }
+
+  /* -----------------------------------------------------
+     Bride
+  ----------------------------------------------------- */
+
+  .couple-bride {
+    left: -8%;
+
+    width: 58vw;
+
+    max-width: 280px;
+  }
+
+  /* -----------------------------------------------------
+     Groom
+  ----------------------------------------------------- */
+
+  .couple-groom {
+    right: -8%;
+
+    width: 58vw;
+
+    max-width: 280px;
+  }
+
+  /* -----------------------------------------------------
+     Garland
+  ----------------------------------------------------- */
+
+  .couple-garland {
+    top: 48%;
+
+    width: 90px;
+  }
+
+  /* -----------------------------------------------------
+     Couple Glow
+  ----------------------------------------------------- */
+
+  .couple-glow {
+    width: 120vw;
+    height: 120vw;
+  }
+
+  /* -----------------------------------------------------
+     Temporary Section
+  ----------------------------------------------------- */
 
   .test-section {
     min-height: 100svh;
@@ -690,6 +1185,38 @@ a {
 
     letter-spacing: 0.1em;
   }
+
+  /* =====================================================
+     COUPLE - SMALL PHONES
+  ===================================================== */
+
+  .couple-content {
+    top: 8%;
+  }
+
+  .couple-eyebrow {
+    font-size: 0.62rem;
+  }
+
+  .couple-content h2 {
+    font-size: 1.9rem;
+  }
+
+  .couple-bride {
+    left: -13%;
+
+    width: 60vw;
+  }
+
+  .couple-groom {
+    right: -13%;
+
+    width: 60vw;
+  }
+
+  .couple-garland {
+    width: 76px;
+  }
 }
 
 /* =========================================================
@@ -726,6 +1253,40 @@ a {
   }
 
   .temple-diya {
+    width: 68px;
+  }
+
+  /* -------------------------------------------------------
+     Couple Very Small Phones
+  ------------------------------------------------------- */
+
+  .couple-content {
+    top: 7%;
+  }
+
+  .couple-eyebrow {
+    font-size: 0.56rem;
+
+    letter-spacing: 0.09em;
+  }
+
+  .couple-content h2 {
+    font-size: 1.7rem;
+  }
+
+  .couple-bride {
+    left: -18%;
+
+    width: 63vw;
+  }
+
+  .couple-groom {
+    right: -18%;
+
+    width: 63vw;
+  }
+
+  .couple-garland {
     width: 68px;
   }
 }

@@ -3,11 +3,13 @@ import CoupleReveal from "./components/CoupleReveal";
 import GarlandCeremony from "./components/GarlandCeremony";
 import WeddingCeremony from "./components/WeddingCeremony";
 import Countdown from "./components/Countdown";
-import WeddingTimeline from "./components/WeddingTimeline";
+import FamilyBlessings from "./components/FamilyBlessings";
+import RSVP from "./components/RSVP";
+import CoupleMemories from "./components/CoupleMemories";
 
 function App() {
   return (
-    <div className="app">
+    <div>
       {/* =================================================
           SECTION 1 — TEMPLE HERO
       ================================================= */}
@@ -39,10 +41,21 @@ function App() {
       <Countdown />
 
       {/* =================================================
-          SECTION 6 — WEDDING TIMELINE
+          SECTION 6 — FAMILY BLESSINGS
       ================================================= */}
 
-      <WeddingTimeline />
+      <FamilyBlessings />
+
+      {/* =================================================
+          SECTION 7 — RSVP
+      ================================================= */}
+
+      <RSVP />
+      {/* =================================================
+          SECTION 8 — COUPLE MEMORIES
+      ================================================= */}
+
+      <CoupleMemories />
     </div>
   );
 }

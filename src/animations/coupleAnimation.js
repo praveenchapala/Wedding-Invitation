@@ -34,6 +34,21 @@ export function createCoupleAnimation(section) {
     ).matches;
 
     /* =====================================================
+       SAFETY CHECK
+    ===================================================== */
+
+    if (
+      !bride ||
+      !groom ||
+      !garland ||
+      !content ||
+      !glow ||
+      !particles
+    ) {
+      return;
+    }
+
+    /* =====================================================
        INITIAL STATES
     ===================================================== */
 
@@ -56,11 +71,21 @@ export function createCoupleAnimation(section) {
     });
 
     /*
-      Garland starts small and slightly below.
+      IMPORTANT:
+      Do NOT use xPercent here.
+
+      The garland is horizontally centered by CSS:
+
+        left: 50%;
+        translate: -50% -50%;
+
+      GSAP only controls:
+        - scale
+        - opacity
+        - y
     */
 
     gsap.set(garland, {
-      xPercent: -50,
       scale: 0.5,
       opacity: 0,
       y: 30,
@@ -103,8 +128,13 @@ export function createCoupleAnimation(section) {
         start: "top top",
 
         /*
-          Give mobile enough scroll distance for the
-          characters to visibly move toward each other.
+          Give mobile enough scroll distance for:
+
+          1. Bride entrance
+          2. Groom entrance
+          3. Couple moving together
+          4. Garland reveal
+          5. Text reveal
         */
 
         end: isMobile
@@ -126,10 +156,15 @@ export function createCoupleAnimation(section) {
        CHARACTERS ENTER
     ===================================================== */
 
+    /*
+      Bride enters from left.
+    */
+
     timeline.to(
       bride,
       {
         xPercent: 0,
+
         opacity: 1,
 
         duration: 0.35,
@@ -139,10 +174,15 @@ export function createCoupleAnimation(section) {
       0
     );
 
+    /*
+      Groom enters from right.
+    */
+
     timeline.to(
       groom,
       {
         xPercent: 0,
+
         opacity: 1,
 
         duration: 0.35,
@@ -158,12 +198,15 @@ export function createCoupleAnimation(section) {
     ===================================================== */
 
     /*
+      After entering, both characters move toward
+      the center.
+
       Desktop:
-      Move them moderately toward the center.
+      Moderate inward movement.
 
       Mobile:
-      Give them a stronger inward movement because
-      the characters start much farther apart visually.
+      Stronger inward movement because the characters
+      occupy more of the screen width.
     */
 
     timeline.to(
@@ -225,8 +268,21 @@ export function createCoupleAnimation(section) {
     );
 
     /* =====================================================
+       PHASE 3
        GARLAND REVEAL
     ===================================================== */
+
+    /*
+      IMPORTANT:
+
+      No xPercent.
+      No x.
+      No left/right changes.
+
+      CSS keeps the garland centered.
+
+      GSAP only controls scale, opacity and y.
+    */
 
     timeline.to(
       garland,
@@ -245,6 +301,7 @@ export function createCoupleAnimation(section) {
     );
 
     /* =====================================================
+       PHASE 4
        TEXT REVEAL
     ===================================================== */
 
@@ -263,10 +320,15 @@ export function createCoupleAnimation(section) {
     );
 
     /* =====================================================
-       AMBIENT FLOATING
-       
-       These run continuously after the scroll animation.
+       AMBIENT BRIDE FLOAT
     ===================================================== */
+
+    /*
+      This uses y only.
+
+      It does not affect the horizontal xPercent
+      positioning of the bride.
+    */
 
     gsap.to(bride, {
       y: -8,
@@ -278,7 +340,13 @@ export function createCoupleAnimation(section) {
       yoyo: true,
 
       ease: "sine.inOut",
+
+      delay: 0.5,
     });
+
+    /* =====================================================
+       AMBIENT GROOM FLOAT
+    ===================================================== */
 
     gsap.to(groom, {
       y: -6,
@@ -290,20 +358,75 @@ export function createCoupleAnimation(section) {
       yoyo: true,
 
       ease: "sine.inOut",
+
+      delay: 0.7,
     });
 
-    gsap.to(garland, {
-      y: -5,
+    /* =====================================================
+       GARLAND AMBIENT MOTION
+    ===================================================== */
 
-      duration: 2.4,
+    /*
+      IMPORTANT:
+
+      Do NOT animate y here.
+
+      The scroll timeline already controls garland y.
+
+      Instead, use a very subtle rotation so the
+      garland has life without fighting the scroll
+      animation.
+    */
+
+    gsap.to(garland, {
+      rotation: 2,
+
+      duration: 2.6,
 
       repeat: -1,
 
       yoyo: true,
 
       ease: "sine.inOut",
+
+      delay: 1,
     });
+
+    /* =====================================================
+       GARLAND SCALE PULSE
+    ===================================================== */
+
+    /*
+      Very subtle pulse.
+
+      This works together with the scroll reveal
+      without changing its position.
+    */
+
+    gsap.to(garland, {
+      scale: isMobile ? 0.80 : 0.87,
+
+      duration: 2.8,
+
+      repeat: -1,
+
+      yoyo: true,
+
+      ease: "sine.inOut",
+
+      delay: 1.2,
+    });
+
+    /* =====================================================
+       PARTICLE REFRESH
+    ===================================================== */
+
+    ScrollTrigger.refresh();
   }, section);
+
+  /* =====================================================
+     CLEANUP
+  ===================================================== */
 
   return () => {
     context.revert();

@@ -16,12 +16,10 @@
 html {
   width: 100%;
   max-width: 100%;
-
   margin: 0;
   padding: 0;
 
   overflow-x: hidden;
-
   scroll-behavior: smooth;
 }
 
@@ -323,9 +321,6 @@ a {
 
 /* =========================================================
    HERO CONTENT
-   IMPORTANT:
-   Explicitly centered so GSAP vertical animation cannot
-   push the content horizontally outside the viewport.
 ========================================================= */
 
 .temple-content {
@@ -341,7 +336,6 @@ a {
   min-width: 0;
 
   margin: 0;
-
   padding: 2rem;
 
   text-align: center;
@@ -454,6 +448,9 @@ a {
   position: relative;
 
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
   min-height: 100vh;
   min-height: 100svh;
 
@@ -479,6 +476,9 @@ a {
 
   z-index: -3;
 
+  width: 100%;
+  height: 100%;
+
   background:
     radial-gradient(
       ellipse at center,
@@ -486,6 +486,8 @@ a {
       rgba(65, 15, 15, 0.45) 35%,
       #120404 75%
     );
+
+  pointer-events: none;
 }
 
 /* =========================================================
@@ -533,8 +535,14 @@ a {
   top: 16%;
 
   width: min(90%, 700px);
+  max-width: 700px;
 
-  transform: translateX(-50%);
+  /*
+    Use translate property rather than transform.
+    This prevents GSAP transform animation from
+    interfering with horizontal centering.
+  */
+  translate: -50% 0;
 
   text-align: center;
 
@@ -642,6 +650,8 @@ a {
   transform-origin: bottom center;
 
   will-change: transform, opacity;
+
+  pointer-events: none;
 }
 
 .couple-bride img {
@@ -678,6 +688,8 @@ a {
   transform-origin: bottom center;
 
   will-change: transform, opacity;
+
+  pointer-events: none;
 }
 
 .couple-groom img {
@@ -695,13 +707,17 @@ a {
 
 /* =========================================================
    GARLAND
+   IMPORTANT:
+   Use CSS translate instead of transform.
+   GSAP can safely animate y/scale without destroying
+   the horizontal centering.
 ========================================================= */
 
 .couple-garland {
   position: absolute;
 
   left: 50%;
-  top: 48%;
+  top: 50%;
 
   z-index: 4;
 
@@ -711,7 +727,16 @@ a {
     180px
   );
 
-  transform: translateX(-50%);
+  /*
+    IMPORTANT:
+    This is intentionally NOT transform.
+    GSAP controls transform internally.
+  */
+  translate: -50% -50%;
+
+  transform: none;
+
+  transform-origin: center center;
 
   will-change: transform, opacity;
 
@@ -719,8 +744,12 @@ a {
 }
 
 .couple-garland img {
+  display: block;
+
   width: 100%;
   height: auto;
+
+  max-width: none;
 
   object-fit: contain;
 
@@ -743,6 +772,8 @@ a {
   z-index: 1;
 
   pointer-events: none;
+
+  overflow: hidden;
 }
 
 .couple-particles span {
@@ -906,7 +937,9 @@ a {
       scale(1.05);
   }
 
-  /* Couple Tablet */
+  /* -------------------------------------------------------
+     Couple Tablet
+  ------------------------------------------------------- */
 
   .couple-bride {
     width: clamp(
@@ -923,6 +956,14 @@ a {
       380px
     );
   }
+
+  .couple-garland {
+    width: clamp(
+      95px,
+      11vw,
+      150px
+    );
+  }
 }
 
 /* =========================================================
@@ -930,6 +971,10 @@ a {
 ========================================================= */
 
 @media (max-width: 768px) {
+  /* =======================================================
+     TEMPLE
+  ======================================================= */
+
   .temple-hero {
     min-height: 100svh;
 
@@ -1024,8 +1069,6 @@ a {
 
   /* -------------------------------------------------------
      Mobile Temple Content
-     
-     Explicit centering prevents horizontal overflow.
   ------------------------------------------------------- */
 
   .temple-content {
@@ -1044,8 +1087,6 @@ a {
     overflow: hidden;
   }
 
-  /* Sanskrit */
-
   .sanskrit {
     margin-bottom: 1rem;
 
@@ -1055,8 +1096,6 @@ a {
       1.4rem
     );
   }
-
-  /* Blessing */
 
   .blessing {
     width: 100%;
@@ -1075,8 +1114,6 @@ a {
     line-height: 1.5;
   }
 
-  /* Main title */
-
   .temple-content h1 {
     width: 100%;
     max-width: 100%;
@@ -1092,8 +1129,6 @@ a {
     text-wrap: balance;
   }
 
-  /* Scroll text */
-
   .scroll-text {
     margin-top: 2.8rem;
 
@@ -1102,28 +1137,34 @@ a {
     letter-spacing: 0.12em;
   }
 
-  /* =====================================================
+  /* =======================================================
      COUPLE REVEAL - MOBILE
-  ===================================================== */
+  ======================================================= */
 
   .couple-reveal {
     min-height: 100svh;
+
+    width: 100%;
 
     padding: 1rem;
 
     align-items: flex-end;
   }
 
-  /* -----------------------------------------------------
+  /* -------------------------------------------------------
      Couple Content
-  ----------------------------------------------------- */
+  ------------------------------------------------------- */
 
   .couple-content {
+    left: 50%;
     top: 7%;
 
     width: 92%;
-
     max-width: 600px;
+
+    translate: -50% 0;
+
+    padding: 0;
   }
 
   .couple-eyebrow {
@@ -1132,6 +1173,8 @@ a {
     font-size: 0.68rem;
 
     letter-spacing: 0.12em;
+
+    line-height: 1.4;
   }
 
   .couple-content h2 {
@@ -1146,54 +1189,86 @@ a {
 
   .couple-divider {
     margin-top: 1.2rem;
+
+    width: 150px;
+
+    gap: 8px;
   }
 
-  /* -----------------------------------------------------
+  .couple-divider span:first-child,
+  .couple-divider span:last-child {
+    width: 42px;
+  }
+
+  /* -------------------------------------------------------
      Bride
-  ----------------------------------------------------- */
+  ------------------------------------------------------- */
 
   .couple-bride {
     left: -4%;
 
+    bottom: 0;
+
     width: 63vw;
 
     max-width: 300px;
   }
 
-  /* -----------------------------------------------------
+  /* -------------------------------------------------------
      Groom
-  ----------------------------------------------------- */
+  ------------------------------------------------------- */
 
   .couple-groom {
     right: -4%;
 
+    bottom: 0;
+
     width: 63vw;
 
     max-width: 300px;
   }
 
-  /* -----------------------------------------------------
+  /* -------------------------------------------------------
      Garland
-  ----------------------------------------------------- */
+     
+     IMPORTANT:
+     `translate` is used instead of `transform`.
+     GSAP can animate transform/y/scale without
+     destroying the horizontal centering.
+  ------------------------------------------------------- */
 
   .couple-garland {
-    top: 43%;
+    left: 50%;
+    top: 50%;
 
     width: 110px;
+
+    translate: -50% -50%;
+
+    transform: none;
   }
 
-  /* -----------------------------------------------------
-     Couple Glow
-  ----------------------------------------------------- */
+  /* -------------------------------------------------------
+     Glow
+  ------------------------------------------------------- */
 
   .couple-glow {
     width: 120vw;
     height: 120vw;
   }
 
-  /* -----------------------------------------------------
+  /* -------------------------------------------------------
+     Particles
+  ------------------------------------------------------- */
+
+  .couple-particles span {
+    width: 3px;
+    height: 3px;
+  }
+
+  /* -------------------------------------------------------
      Temporary Section
-  ----------------------------------------------------- */
+  ------------------------------------------------------- */
 
   .test-section {
     min-height: 100svh;
@@ -1213,11 +1288,13 @@ a {
 ========================================================= */
 
 @media (max-width: 390px) {
+  /* =======================================================
+     TEMPLE
+  ======================================================= */
+
   .temple-hero {
     padding: 0.5rem;
   }
-
-  /* Temple */
 
   .temple-image {
     transform:
@@ -1229,8 +1306,24 @@ a {
     width: 58px;
   }
 
+  .temple-bell-left {
+    left: 0.5%;
+  }
+
+  .temple-bell-right {
+    right: 0.5%;
+  }
+
   .temple-flowers {
     width: 88px;
+  }
+
+  .temple-flowers-left {
+    left: -10px;
+  }
+
+  .temple-flowers-right {
+    right: -10px;
   }
 
   .temple-diya {
@@ -1273,22 +1366,38 @@ a {
     letter-spacing: 0.1em;
   }
 
-  /* =====================================================
-     COUPLE - SMALL PHONES
-  ===================================================== */
+  /* =======================================================
+     COUPLE
+  ======================================================= */
 
   .couple-content {
+    left: 50%;
     top: 7%;
 
     width: 92%;
+
+    translate: -50% 0;
   }
 
   .couple-eyebrow {
     font-size: 0.62rem;
+
+    letter-spacing: 0.1em;
   }
 
   .couple-content h2 {
     font-size: 1.9rem;
+  }
+
+  .couple-divider {
+    width: 135px;
+
+    margin-top: 1rem;
+  }
+
+  .couple-divider span:first-child,
+  .couple-divider span:last-child {
+    width: 38px;
   }
 
   .couple-bride {
@@ -1307,10 +1416,19 @@ a {
     max-width: 285px;
   }
 
+  /* -------------------------------------------------------
+     Garland
+  ------------------------------------------------------- */
+
   .couple-garland {
-    top: 43%;
+    left: 50%;
+    top: 50%;
 
     width: 90px;
+
+    translate: -50% -50%;
+
+    transform: none;
   }
 }
 
@@ -1319,6 +1437,10 @@ a {
 ========================================================= */
 
 @media (max-width: 350px) {
+  /* =======================================================
+     TEMPLE
+  ======================================================= */
+
   .temple-content {
     left: 50%;
     top: 50%;
@@ -1359,9 +1481,9 @@ a {
     width: 68px;
   }
 
-  /* -------------------------------------------------------
-     Couple Very Small Phones
-  ------------------------------------------------------- */
+  /* =======================================================
+     COUPLE
+  ======================================================= */
 
   .couple-content {
     top: 6%;
@@ -1375,6 +1497,17 @@ a {
 
   .couple-content h2 {
     font-size: 1.7rem;
+  }
+
+  .couple-divider {
+    width: 120px;
+
+    gap: 6px;
+  }
+
+  .couple-divider span:first-child,
+  .couple-divider span:last-child {
+    width: 34px;
   }
 
   .couple-bride {
@@ -1394,9 +1527,48 @@ a {
   }
 
   .couple-garland {
-    top: 42%;
+    left: 50%;
+    top: 50%;
 
     width: 78px;
+
+    translate: -50% -50%;
+
+    transform: none;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE MOBILE
+========================================================= */
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .couple-content {
+    top: 5%;
+  }
+
+  .couple-content h2 {
+    font-size: clamp(
+      1.5rem,
+      6vw,
+      2.5rem
+    );
+  }
+
+  .couple-bride {
+    width: 42vh;
+    max-width: 240px;
+  }
+
+  .couple-groom {
+    width: 42vh;
+    max-width: 240px;
+  }
+
+  .couple-garland {
+    top: 50%;
+
+    width: 75px;
   }
 }
 

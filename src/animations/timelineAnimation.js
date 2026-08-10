@@ -3,26 +3,52 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function createCoupleAnimation(section) {
+export function createTimelineAnimation(section) {
   if (!section) {
     return () => {};
   }
 
   const context = gsap.context(() => {
+
     /* =====================================================
        ELEMENTS
     ===================================================== */
 
-    const bride = section.querySelector(".couple-bride");
-    const groom = section.querySelector(".couple-groom");
-    const garland = section.querySelector(".couple-garland");
-    const content = section.querySelector(".couple-content");
-    const glow = section.querySelector(".couple-glow");
-    const particles = section.querySelector(".couple-particles");
+    const header = section.querySelector(
+      ".timeline-header"
+    );
 
-    /* =====================================================
-       DEVICE CHECK
-    ===================================================== */
+    const reception = section.querySelector(
+      ".timeline-reception"
+    );
+
+    const muhurtham = section.querySelector(
+      ".timeline-muhurtham"
+    );
+
+    const connector = section.querySelector(
+      ".timeline-connector"
+    );
+
+    const connectorLine = section.querySelectorAll(
+      ".connector-line"
+    );
+
+    const connectorSymbol = section.querySelector(
+      ".connector-symbol"
+    );
+
+    const venue = section.querySelector(
+      ".timeline-venue"
+    );
+
+    const glow = section.querySelector(
+      ".timeline-glow"
+    );
+
+    const particles = section.querySelector(
+      ".timeline-particles"
+    );
 
     const isMobile = window.matchMedia(
       "(max-width: 768px)"
@@ -33,10 +59,12 @@ export function createCoupleAnimation(section) {
     ===================================================== */
 
     if (
-      !bride ||
-      !groom ||
-      !garland ||
-      !content ||
+      !header ||
+      !reception ||
+      !muhurtham ||
+      !connector ||
+      !connectorSymbol ||
+      !venue ||
       !glow ||
       !particles
     ) {
@@ -47,70 +75,46 @@ export function createCoupleAnimation(section) {
        INITIAL STATES
     ===================================================== */
 
-    /*
-      Bride enters from the left.
-    */
+    gsap.set(header, {
+      opacity: 0,
+      y: 50,
+    });
 
-    gsap.set(bride, {
-      xPercent: -120,
+    gsap.set(reception, {
+      opacity: 0,
+      x: isMobile ? 0 : -100,
+      y: isMobile ? 50 : 0,
+    });
+
+    gsap.set(muhurtham, {
+      opacity: 0,
+      x: isMobile ? 0 : 100,
+      y: isMobile ? 50 : 0,
+    });
+
+    gsap.set(connector, {
       opacity: 0,
     });
 
-    /*
-      Groom enters from the right.
-    */
-
-    gsap.set(groom, {
-      xPercent: 120,
-      opacity: 0,
+    gsap.set(connectorLine, {
+      scaleX: 0,
+      transformOrigin: "center center",
     });
 
-    /*
-      IMPORTANT:
-      Keep the garland horizontally centered.
-
-      CSS controls:
-        left: 50%
-        transform: translateX(-50%)
-
-      GSAP controls only:
-        scale
-        opacity
-        y
-        rotation
-
-      Do NOT animate x or xPercent.
-    */
-
-    gsap.set(garland, {
-      x: 0,
-      y: 30,
+    gsap.set(connectorSymbol, {
+      opacity: 0,
       scale: 0.5,
-      opacity: 0,
-      rotation: 0,
     });
 
-    /*
-      Title starts slightly below.
-    */
-
-    gsap.set(content, {
+    gsap.set(venue, {
       opacity: 0,
-      y: 30,
+      y: 50,
     });
-
-    /*
-      Glow starts invisible.
-    */
 
     gsap.set(glow, {
       opacity: 0,
-      scale: 0.65,
+      scale: 0.6,
     });
-
-    /*
-      Particles start invisible.
-    */
 
     gsap.set(particles, {
       opacity: 0,
@@ -127,7 +131,7 @@ export function createCoupleAnimation(section) {
         start: "top top",
 
         end: isMobile
-          ? "+=110%"
+          ? "+=145%"
           : "+=160%",
 
         scrub: 0.8,
@@ -142,24 +146,14 @@ export function createCoupleAnimation(section) {
 
     /* =====================================================
        PHASE 1
-       COUPLE ENTERS
+       HEADER
     ===================================================== */
 
     timeline.to(
-      bride,
+      header,
       {
-        xPercent: 0,
         opacity: 1,
-        ease: "power3.out",
-      },
-      0
-    );
-
-    timeline.to(
-      groom,
-      {
-        xPercent: 0,
-        opacity: 1,
+        y: 0,
         ease: "power3.out",
       },
       0
@@ -167,34 +161,6 @@ export function createCoupleAnimation(section) {
 
     /* =====================================================
        PHASE 2
-       COUPLE MOVES TOWARD EACH OTHER
-    ===================================================== */
-
-    /*
-      Mobile gets stronger inward movement so the
-      couple visibly comes together on small screens.
-    */
-
-    timeline.to(
-      bride,
-      {
-        xPercent: isMobile ? 28 : 18,
-        ease: "power2.inOut",
-      },
-      0.35
-    );
-
-    timeline.to(
-      groom,
-      {
-        xPercent: isMobile ? -28 : -18,
-        ease: "power2.inOut",
-      },
-      0.35
-    );
-
-    /* =====================================================
-       PHASE 3
        GOLDEN GLOW
     ===================================================== */
 
@@ -205,11 +171,11 @@ export function createCoupleAnimation(section) {
         scale: 1,
         ease: "power2.out",
       },
-      0.2
+      0.1
     );
 
     /* =====================================================
-       PHASE 4
+       PHASE 3
        PARTICLES
     ===================================================== */
 
@@ -219,68 +185,112 @@ export function createCoupleAnimation(section) {
         opacity: 1,
         ease: "power2.out",
       },
-      0.25
+      0.15
+    );
+
+    /* =====================================================
+       PHASE 4
+       RECEPTION
+    ===================================================== */
+
+    timeline.to(
+      reception,
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        ease: "power3.out",
+      },
+      0.3
     );
 
     /* =====================================================
        PHASE 5
-       GARLAND REVEAL
+       MUHURTHAM
     ===================================================== */
 
-    /*
-      IMPORTANT:
-
-      The garland remains at the exact horizontal center.
-
-      We do NOT use:
-        x
-        xPercent
-        left
-        right
-
-      Only vertical movement + scale + opacity.
-    */
-
     timeline.to(
-      garland,
+      muhurtham,
       {
+        opacity: 1,
         x: 0,
         y: 0,
-
-        scale: isMobile
-          ? 0.72
-          : 0.85,
-
-        opacity: 1,
-
-        rotation: 0,
-
-        ease: "back.out(1.2)",
+        ease: "power3.out",
       },
-      0.65
+      0.45
     );
 
     /* =====================================================
        PHASE 6
-       TITLE REVEAL
+       CONNECTOR
     ===================================================== */
 
     timeline.to(
-      content,
+      connector,
+      {
+        opacity: 1,
+        ease: "power2.out",
+      },
+      0.55
+    );
+
+    timeline.to(
+      connectorLine,
+      {
+        scaleX: 1,
+        stagger: 0.1,
+        ease: "power2.inOut",
+      },
+      0.6
+    );
+
+    timeline.to(
+      connectorSymbol,
+      {
+        opacity: 1,
+        scale: 1,
+        ease: "back.out(1.5)",
+      },
+      0.68
+    );
+
+    /* =====================================================
+       PHASE 7
+       VENUE
+    ===================================================== */
+
+    timeline.to(
+      venue,
       {
         opacity: 1,
         y: 0,
         ease: "power3.out",
       },
-      0.75
+      0.82
     );
 
     /* =====================================================
-       AMBIENT BRIDE FLOAT
+       AMBIENT GLOW
     ===================================================== */
 
-    gsap.to(bride, {
-      y: -6,
+    gsap.to(glow, {
+      scale: 1.08,
+
+      duration: 4,
+
+      repeat: -1,
+
+      yoyo: true,
+
+      ease: "sine.inOut",
+    });
+
+    /* =====================================================
+       AMBIENT CONNECTOR SYMBOL
+    ===================================================== */
+
+    gsap.to(connectorSymbol, {
+      rotation: 5,
 
       duration: 3,
 
@@ -289,63 +299,55 @@ export function createCoupleAnimation(section) {
       yoyo: true,
 
       ease: "sine.inOut",
-
-      delay: 0.5,
     });
 
     /* =====================================================
-       AMBIENT GROOM FLOAT
+       PARTICLE MOTION
     ===================================================== */
 
-    gsap.to(groom, {
-      y: -5,
+    const particleElements =
+      section.querySelectorAll(
+        ".timeline-particles span"
+      );
 
-      duration: 3.3,
+    particleElements.forEach(
+      (particle, index) => {
+        gsap.to(particle, {
+          y:
+            index % 2 === 0
+              ? -15
+              : 15,
 
-      repeat: -1,
+          x:
+            index % 2 === 0
+              ? 8
+              : -8,
 
-      yoyo: true,
+          opacity:
+            index % 2 === 0
+              ? 0.9
+              : 0.45,
 
-      ease: "sine.inOut",
+          duration:
+            3 + index * 0.25,
 
-      delay: 0.7,
-    });
+          repeat: -1,
 
-    /* =====================================================
-       GARLAND AMBIENT ROTATION
-    ===================================================== */
+          yoyo: true,
 
-    /*
-      Only rotate the garland slightly.
+          ease: "sine.inOut",
 
-      Do NOT animate:
-        x
-        xPercent
-        y
-
-      This prevents the garland from drifting toward
-      the groom's head.
-    */
-
-    gsap.to(garland, {
-      rotation: 2,
-
-      duration: 2.6,
-
-      repeat: -1,
-
-      yoyo: true,
-
-      ease: "sine.inOut",
-
-      delay: 1,
-    });
+          delay: index * 0.2,
+        });
+      }
+    );
 
     /* =====================================================
-       REFRESH SCROLLTRIGGER
+       REFRESH
     ===================================================== */
 
     ScrollTrigger.refresh();
+
   }, section);
 
   /* =====================================================

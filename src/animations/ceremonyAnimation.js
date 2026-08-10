@@ -185,10 +185,10 @@ export function createCeremonyAnimation(section) {
         */
 
         end: isSmallMobile
-          ? "+=115%"
-          : isMobile
-            ? "+=125%"
-            : "+=145%",
+  ? "+=100%"
+  : isMobile
+    ? "+=110%"
+    : "+=145%",
 
         scrub: 0.8,
 

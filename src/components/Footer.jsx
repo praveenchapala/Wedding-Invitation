@@ -27,6 +27,10 @@ function Footer() {
         ".wedding-footer-symbol"
       );
 
+      /* =====================================================
+         INITIAL STATES
+      ===================================================== */
+
       gsap.set(elements, {
         opacity: 0,
         y: 30,
@@ -42,19 +46,23 @@ function Footer() {
         scale: 0.7,
       });
 
+      /* =====================================================
+         SCROLL ANIMATION
+      ===================================================== */
+
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-
           start: "top 80%",
-
           end: "bottom 70%",
-
           scrub: 0.8,
-
           invalidateOnRefresh: true,
         },
       });
+
+      /* =====================================================
+         GLOW REVEAL
+      ===================================================== */
 
       timeline.to(
         glow,
@@ -66,6 +74,10 @@ function Footer() {
         0
       );
 
+      /* =====================================================
+         OM SYMBOL
+      ===================================================== */
+
       timeline.to(
         symbol,
         {
@@ -75,6 +87,10 @@ function Footer() {
         },
         0.1
       );
+
+      /* =====================================================
+         CONTENT REVEAL
+      ===================================================== */
 
       timeline.to(
         elements,
@@ -87,20 +103,16 @@ function Footer() {
         0.2
       );
 
-      /* ==========================================
+      /* =====================================================
          AMBIENT GLOW
-      ========================================== */
+      ===================================================== */
 
       gsap.to(glow, {
         scale: 1.08,
         opacity: 0.8,
-
         duration: 4,
-
         repeat: -1,
-
         yoyo: true,
-
         ease: "sine.inOut",
       });
     }, section);
@@ -132,24 +144,32 @@ function Footer() {
       </div>
 
       {/* =================================================
-          MAIN MESSAGE
+          MAIN CONTENT
       ================================================= */}
 
       <div className="wedding-footer-content">
+
+        {/* EYEBROW */}
 
         <p className="wedding-footer-eyebrow wedding-footer-animate">
           With Grateful Hearts
         </p>
 
+        {/* TITLE */}
+
         <h2 className="wedding-footer-title wedding-footer-animate">
           Thank You
         </h2>
+
+        {/* DIVIDER */}
 
         <div className="wedding-footer-divider wedding-footer-animate">
           <span />
           <strong>✦</strong>
           <span />
         </div>
+
+        {/* MESSAGE */}
 
         <p className="wedding-footer-message wedding-footer-animate">
           We are grateful to have you
@@ -221,6 +241,17 @@ function Footer() {
 
         </div>
 
+        {/* =================================================
+            CREATOR SIGNATURE
+        ================================================= */}
+
+        <p className="wedding-footer-creator wedding-footer-animate">
+          Made with Love by{" "}
+          <strong>
+            Chapala Praveen
+          </strong>
+        </p>
+
       </div>
 
       {/* =================================================
@@ -228,6 +259,7 @@ function Footer() {
       ================================================= */}
 
       <div className="wedding-footer-bottom">
+
         <span>
           26 · 08 · 2026
         </span>
@@ -239,6 +271,7 @@ function Footer() {
         <span>
           With Love
         </span>
+
       </div>
     </footer>
   );

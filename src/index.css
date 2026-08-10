@@ -7017,3 +7017,24 @@ a {
     transition: none !important;
   }
 }
+/* =====================================================
+   FOOTER — CREATOR SIGNATURE
+===================================================== */
+
+.wedding-footer-creator {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(216, 173, 91, 0.18);
+
+  color: rgba(245, 215, 140, 0.65);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: none;
+}
+
+.wedding-footer-creator strong {
+  color: #d8ad5b;
+  font-weight: 500;
+}

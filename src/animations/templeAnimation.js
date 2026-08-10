@@ -60,6 +60,7 @@ export function createTempleAnimation(section) {
        AMBIENT DECORATION
     ===================================================== */
 
+    // LEFT BELL
     gsap.to(leftBell, {
       rotation: 3,
       duration: 2.2,
@@ -69,6 +70,7 @@ export function createTempleAnimation(section) {
       transformOrigin: "top center",
     });
 
+    // RIGHT BELL
     gsap.to(rightBell, {
       rotation: -3,
       duration: 2.5,
@@ -78,9 +80,15 @@ export function createTempleAnimation(section) {
       transformOrigin: "top center",
     });
 
+    /* =====================================================
+       FLOWERS
+
+       Both flowers now have IDENTICAL behaviour.
+       The right flower no longer rotates.
+    ===================================================== */
+
     gsap.to(leftFlowers, {
       y: -8,
-      rotation: 1.5,
       duration: 3,
       repeat: -1,
       yoyo: true,
@@ -89,12 +97,15 @@ export function createTempleAnimation(section) {
 
     gsap.to(rightFlowers, {
       y: -8,
-      rotation: -1.5,
-      duration: 3.2,
+      duration: 3,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
     });
+
+    /* =====================================================
+       DIYA
+    ===================================================== */
 
     gsap.to(diya, {
       y: -4,
@@ -196,6 +207,9 @@ export function createTempleAnimation(section) {
 
     /* =====================================================
        FLOWERS
+
+       Both flowers move upward and fade out together.
+       No rotation is applied to either flower.
     ===================================================== */
 
     timeline.to(
@@ -232,8 +246,16 @@ export function createTempleAnimation(section) {
       0
     );
 
+    /* =====================================================
+       REFRESH SCROLLTRIGGER
+    ===================================================== */
+
     ScrollTrigger.refresh();
   }, section);
+
+  /* =====================================================
+     CLEANUP
+  ===================================================== */
 
   return () => {
     context.revert();

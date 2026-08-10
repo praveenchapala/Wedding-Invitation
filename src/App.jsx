@@ -6,10 +6,13 @@ import Countdown from "./components/Countdown";
 import FamilyBlessings from "./components/FamilyBlessings";
 import RSVP from "./components/RSVP";
 import CoupleMemories from "./components/CoupleMemories";
+import VenueLocation from "./components/VenueLocation";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div>
+
       {/* =================================================
           SECTION 1 — TEMPLE HERO
       ================================================= */}
@@ -51,11 +54,25 @@ function App() {
       ================================================= */}
 
       <RSVP />
+
       {/* =================================================
           SECTION 8 — COUPLE MEMORIES
       ================================================= */}
 
       <CoupleMemories />
+
+      {/* =================================================
+          SECTION 9 — VENUE LOCATION
+      ================================================= */}
+
+      <VenueLocation />
+
+      {/* =================================================
+          SECTION 10 — FINAL FOOTER
+      ================================================= */}
+
+      <Footer />
+
     </div>
   );
 }

@@ -9,10 +9,6 @@ export function createTempleAnimation(section) {
   }
 
   const context = gsap.context(() => {
-    /* =====================================================
-       ELEMENTS
-    ===================================================== */
-
     const artwork = section.querySelector(".temple-image");
     const overlay = section.querySelector(".temple-overlay");
     const content = section.querySelector(".temple-content");
@@ -20,19 +16,27 @@ export function createTempleAnimation(section) {
     const leftBell = section.querySelector(".temple-bell-left");
     const rightBell = section.querySelector(".temple-bell-right");
 
-    const leftFlowers = section.querySelector(
-      ".temple-flowers-left"
-    );
-
-    const rightFlowers = section.querySelector(
-      ".temple-flowers-right"
-    );
+    const leftFlowers = section.querySelector(".temple-flowers-left");
+    const rightFlowers = section.querySelector(".temple-flowers-right");
 
     const diya = section.querySelector(".temple-diya");
 
     const isMobile = window.matchMedia(
       "(max-width: 768px)"
     ).matches;
+
+    if (
+      !artwork ||
+      !overlay ||
+      !content ||
+      !leftBell ||
+      !rightBell ||
+      !leftFlowers ||
+      !rightFlowers ||
+      !diya
+    ) {
+      return;
+    }
 
     /* =====================================================
        INITIAL STATES
@@ -41,19 +45,10 @@ export function createTempleAnimation(section) {
     gsap.set(artwork, {
       xPercent: -50,
       yPercent: -50,
-      scale: 1,
+      x: 0,
+      y: 0,
+      scale: isMobile ? 1.08 : 1.02,
     });
-
-    /*
-      IMPORTANT:
-      Do NOT animate x on the content.
-
-      The content is horizontally centered using:
-      left: 50%
-      transform: translateX(-50%)
-
-      GSAP will only animate y and opacity.
-    */
 
     gsap.set(content, {
       xPercent: -50,
@@ -62,7 +57,7 @@ export function createTempleAnimation(section) {
     });
 
     /* =====================================================
-       AMBIENT BELL ANIMATION
+       AMBIENT DECORATION
     ===================================================== */
 
     gsap.to(leftBell, {
@@ -83,12 +78,8 @@ export function createTempleAnimation(section) {
       transformOrigin: "top center",
     });
 
-    /* =====================================================
-       FLOWER AMBIENT MOTION
-    ===================================================== */
-
     gsap.to(leftFlowers, {
-      y: -10,
+      y: -8,
       rotation: 1.5,
       duration: 3,
       repeat: -1,
@@ -99,15 +90,11 @@ export function createTempleAnimation(section) {
     gsap.to(rightFlowers, {
       y: -8,
       rotation: -1.5,
-      duration: 3.4,
+      duration: 3.2,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
     });
-
-    /* =====================================================
-       DIYA AMBIENT MOTION
-    ===================================================== */
 
     gsap.to(diya, {
       y: -4,
@@ -129,10 +116,10 @@ export function createTempleAnimation(section) {
         start: "top top",
 
         end: isMobile
-          ? "+=110%"
-          : "+=150%",
+          ? "+=90%"
+          : "+=140%",
 
-        scrub: 1,
+        scrub: 0.8,
 
         pin: true,
 
@@ -149,34 +136,22 @@ export function createTempleAnimation(section) {
     timeline.to(
       artwork,
       {
-        yPercent: -50,
-        xPercent: -50,
-
-        y: isMobile ? -70 : -140,
-
-        scale: isMobile ? 1.16 : 1.12,
-
+        y: isMobile ? -35 : -100,
+        scale: isMobile ? 1.13 : 1.10,
         ease: "none",
       },
       0
     );
 
     /* =====================================================
-       TEXT MOVEMENT
-
-       IMPORTANT:
-       xPercent remains -50 so the content stays centered.
+       TEXT EXIT
     ===================================================== */
 
     timeline.to(
       content,
       {
-        xPercent: -50,
-
-        y: isMobile ? -90 : -150,
-
+        y: isMobile ? -55 : -120,
         opacity: 0,
-
         ease: "none",
       },
       0
@@ -189,8 +164,7 @@ export function createTempleAnimation(section) {
     timeline.to(
       overlay,
       {
-        opacity: 0.85,
-
+        opacity: 0.82,
         ease: "none",
       },
       0
@@ -203,10 +177,8 @@ export function createTempleAnimation(section) {
     timeline.to(
       leftBell,
       {
-        y: isMobile ? -50 : -90,
-
-        rotation: -5,
-
+        y: isMobile ? -30 : -70,
+        rotation: -4,
         ease: "none",
       },
       0
@@ -215,10 +187,8 @@ export function createTempleAnimation(section) {
     timeline.to(
       rightBell,
       {
-        y: isMobile ? -40 : -80,
-
-        rotation: 5,
-
+        y: isMobile ? -25 : -60,
+        rotation: 4,
         ease: "none",
       },
       0
@@ -231,10 +201,8 @@ export function createTempleAnimation(section) {
     timeline.to(
       leftFlowers,
       {
-        y: isMobile ? -35 : -70,
-
+        y: isMobile ? -20 : -55,
         opacity: 0,
-
         ease: "none",
       },
       0
@@ -243,10 +211,8 @@ export function createTempleAnimation(section) {
     timeline.to(
       rightFlowers,
       {
-        y: isMobile ? -35 : -70,
-
+        y: isMobile ? -20 : -55,
         opacity: 0,
-
         ease: "none",
       },
       0
@@ -259,14 +225,14 @@ export function createTempleAnimation(section) {
     timeline.to(
       diya,
       {
-        y: isMobile ? -25 : -50,
-
+        y: isMobile ? -15 : -40,
         opacity: 0,
-
         ease: "none",
       },
       0
     );
+
+    ScrollTrigger.refresh();
   }, section);
 
   return () => {

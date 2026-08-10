@@ -21,17 +21,15 @@ function CoupleReveal() {
       ref={sectionRef}
       className="couple-reveal"
     >
-      {/* =================================================
-          BACKGROUND
-      ================================================= */}
+      {/* BACKGROUND */}
 
       <div className="couple-background" />
 
+      {/* GOLDEN GLOW */}
+
       <div className="couple-glow" />
 
-      {/* =================================================
-          DECORATIVE PARTICLES
-      ================================================= */}
+      {/* PARTICLES */}
 
       <div className="couple-particles">
         <span />
@@ -44,9 +42,7 @@ function CoupleReveal() {
         <span />
       </div>
 
-      {/* =================================================
-          BRIDE
-      ================================================= */}
+      {/* BRIDE */}
 
       <div className="couple-bride">
         <img
@@ -55,9 +51,7 @@ function CoupleReveal() {
         />
       </div>
 
-      {/* =================================================
-          GROOM
-      ================================================= */}
+      {/* GROOM */}
 
       <div className="couple-groom">
         <img
@@ -66,9 +60,7 @@ function CoupleReveal() {
         />
       </div>
 
-      {/* =================================================
-          GARLAND
-      ================================================= */}
+      {/* GARLAND */}
 
       <div className="couple-garland">
         <img
@@ -77,9 +69,7 @@ function CoupleReveal() {
         />
       </div>
 
-      {/* =================================================
-          CENTER CONTENT
-      ================================================= */}
+      {/* CONTENT */}
 
       <div className="couple-content">
         <p className="couple-eyebrow">

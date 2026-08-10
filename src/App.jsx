@@ -1,16 +1,24 @@
 import TempleHero from "./components/TempleHero";
 import CoupleReveal from "./components/CoupleReveal";
+import GarlandCeremony from "./components/GarlandCeremony";
 
 function App() {
   return (
     <div className="app">
+      {/* =====================================================
+          SECTION 1 — TEMPLE HERO
+      ===================================================== */}
       <TempleHero />
 
+      {/* =====================================================
+          SECTION 2 — COUPLE REVEAL
+      ===================================================== */}
       <CoupleReveal />
 
-      <section className="test-section">
-        <p>Our story begins...</p>
-      </section>
+      {/* =====================================================
+          SECTION 3 — GARLAND CEREMONY
+      ===================================================== */}
+      <GarlandCeremony />
     </div>
   );
 }

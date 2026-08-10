@@ -10,7 +10,9 @@ function TempleHero() {
   const sectionRef = useRef(null);
 
   useLayoutEffect(() => {
-    const cleanup = createTempleAnimation(sectionRef.current);
+    const cleanup = createTempleAnimation(
+      sectionRef.current
+    );
 
     return cleanup;
   }, []);
@@ -20,9 +22,7 @@ function TempleHero() {
       ref={sectionRef}
       className="temple-hero"
     >
-      {/* =================================================
-          TEMPLE BACKGROUND
-      ================================================= */}
+      {/* TEMPLE BACKGROUND */}
 
       <div className="temple-artwork">
         <img
@@ -32,15 +32,11 @@ function TempleHero() {
         />
       </div>
 
-      {/* =================================================
-          ATMOSPHERIC OVERLAY
-      ================================================= */}
+      {/* OVERLAY */}
 
       <div className="temple-overlay" />
 
-      {/* =================================================
-          DECORATIVE BELL - LEFT
-      ================================================= */}
+      {/* LEFT BELL */}
 
       <div className="temple-bell temple-bell-left">
         <img
@@ -49,9 +45,7 @@ function TempleHero() {
         />
       </div>
 
-      {/* =================================================
-          DECORATIVE BELL - RIGHT
-      ================================================= */}
+      {/* RIGHT BELL */}
 
       <div className="temple-bell temple-bell-right">
         <img
@@ -60,9 +54,7 @@ function TempleHero() {
         />
       </div>
 
-      {/* =================================================
-          FLOWERS - LEFT
-      ================================================= */}
+      {/* LEFT FLOWERS */}
 
       <div className="temple-flowers temple-flowers-left">
         <img
@@ -71,9 +63,7 @@ function TempleHero() {
         />
       </div>
 
-      {/* =================================================
-          FLOWERS - RIGHT
-      ================================================= */}
+      {/* RIGHT FLOWERS */}
 
       <div className="temple-flowers temple-flowers-right">
         <img
@@ -82,9 +72,7 @@ function TempleHero() {
         />
       </div>
 
-      {/* =================================================
-          DIYA
-      ================================================= */}
+      {/* DIYA */}
 
       <div className="temple-diya">
         <img
@@ -93,9 +81,7 @@ function TempleHero() {
         />
       </div>
 
-      {/* =================================================
-          WEDDING CONTENT
-      ================================================= */}
+      {/* CONTENT */}
 
       <div className="temple-content">
         <p className="sanskrit">

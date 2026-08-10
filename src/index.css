@@ -20,6 +20,7 @@ html {
   padding: 0;
 
   overflow-x: hidden;
+
   scroll-behavior: smooth;
 }
 
@@ -537,11 +538,6 @@ a {
   width: min(90%, 700px);
   max-width: 700px;
 
-  /*
-    Use translate property rather than transform.
-    This prevents GSAP transform animation from
-    interfering with horizontal centering.
-  */
   translate: -50% 0;
 
   text-align: center;
@@ -706,11 +702,10 @@ a {
 }
 
 /* =========================================================
-   GARLAND
+   COUPLE GARLAND
    IMPORTANT:
-   Use CSS translate instead of transform.
-   GSAP can safely animate y/scale without destroying
-   the horizontal centering.
+   CSS translate keeps the element centered while GSAP
+   controls the transform property.
 ========================================================= */
 
 .couple-garland {
@@ -727,11 +722,6 @@ a {
     180px
   );
 
-  /*
-    IMPORTANT:
-    This is intentionally NOT transform.
-    GSAP controls transform internally.
-  */
   translate: -50% -50%;
 
   transform: none;
@@ -917,18 +907,518 @@ a {
 }
 
 /* =========================================================
+   GARLAND CEREMONY
+========================================================= */
+
+.garland-ceremony {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  min-height: 100vh;
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #120303;
+
+  isolation: isolate;
+}
+
+/* =========================================================
+   CEREMONY BACKGROUND
+========================================================= */
+
+.ceremony-background {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -5;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    radial-gradient(
+      ellipse at center 55%,
+      rgba(142, 75, 25, 0.30),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at center,
+      rgba(72, 20, 15, 0.45),
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      #100202 0%,
+      #260707 50%,
+      #0d0202 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CEREMONY GOLDEN CENTER GLOW
+========================================================= */
+
+.ceremony-glow {
+  position: absolute;
+
+  left: 50%;
+  top: 55%;
+
+  width: min(75vw, 900px);
+  height: min(75vw, 900px);
+
+  translate: -50% -50%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(239, 184, 76, 0.32) 0%,
+      rgba(205, 132, 37, 0.14) 32%,
+      transparent 70%
+    );
+
+  filter: blur(12px);
+
+  z-index: -2;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CEREMONY LIGHTS
+========================================================= */
+
+.ceremony-light {
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 190, 75, 0.22),
+      transparent 70%
+    );
+
+  filter: blur(12px);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+.ceremony-light-left {
+  left: -80px;
+  top: 35%;
+}
+
+.ceremony-light-right {
+  right: -80px;
+  top: 42%;
+}
+
+/* =========================================================
+   CEREMONY CONTENT
+========================================================= */
+
+.ceremony-content {
+  position: absolute;
+
+  top: 9%;
+  left: 50%;
+
+  width: min(90%, 760px);
+  max-width: 760px;
+
+  translate: -50% 0;
+
+  z-index: 8;
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+.ceremony-eyebrow {
+  margin-bottom: 1rem;
+
+  color: #d8ad5b;
+
+  font-size: clamp(
+    0.7rem,
+    1.5vw,
+    1rem
+  );
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+
+  line-height: 1.4;
+}
+
+.ceremony-content h2 {
+  margin: 0;
+
+  color: #f5d78c;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(
+    2.2rem,
+    5.5vw,
+    5rem
+  );
+
+  font-weight: 500;
+
+  line-height: 1.05;
+
+  text-wrap: balance;
+
+  text-shadow:
+    0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   CEREMONY DIVIDER
+========================================================= */
+
+.ceremony-divider {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin: 1.6rem auto 0;
+
+  color: #d8ad5b;
+}
+
+.ceremony-divider span {
+  width: 70px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d8ad5b
+    );
+}
+
+.ceremony-divider span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      #d8ad5b,
+      transparent
+    );
+}
+
+.ceremony-divider strong {
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   CEREMONY BRIDE
+========================================================= */
+
+.ceremony-bride {
+  position: absolute;
+
+  left: 2%;
+  bottom: 0;
+
+  z-index: 5;
+
+  width: clamp(
+    240px,
+    30vw,
+    470px
+  );
+
+  transform-origin: bottom center;
+
+  will-change: transform, opacity;
+
+  pointer-events: none;
+}
+
+.ceremony-bride img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 20px 30px
+      rgba(0, 0, 0, 0.55)
+    );
+}
+
+/* =========================================================
+   CEREMONY GROOM
+========================================================= */
+
+.ceremony-groom {
+  position: absolute;
+
+  right: 2%;
+  bottom: 0;
+
+  z-index: 5;
+
+  width: clamp(
+    240px,
+    30vw,
+    470px
+  );
+
+  transform-origin: bottom center;
+
+  will-change: transform, opacity;
+
+  pointer-events: none;
+}
+
+.ceremony-groom img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 20px 30px
+      rgba(0, 0, 0, 0.55)
+    );
+}
+
+/* =========================================================
+   CEREMONY GARLAND
+   IMPORTANT:
+   left: 50% + translate: -50% guarantees true center.
+   GSAP can still control transform independently.
+========================================================= */
+
+.ceremony-garland {
+  position: absolute;
+
+  left: 50%;
+  top: 52%;
+
+  z-index: 7;
+
+  width: clamp(
+    110px,
+    13vw,
+    190px
+  );
+
+  translate: -50% -50%;
+
+  transform: none;
+
+  transform-origin: center center;
+
+  will-change: transform, opacity;
+
+  pointer-events: none;
+}
+
+.ceremony-garland img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: none;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 15px 22px
+      rgba(0, 0, 0, 0.5)
+    );
+}
+
+/* =========================================================
+   CEREMONY SYMBOL
+========================================================= */
+
+.ceremony-symbol {
+  position: absolute;
+
+  left: 50%;
+  top: 29%;
+
+  translate: -50% 0;
+
+  z-index: 6;
+
+  color: #d8ad5b;
+
+  font-size: clamp(
+    1.5rem,
+    3vw,
+    2.5rem
+  );
+
+  line-height: 1;
+
+  text-shadow:
+    0 0 20px rgba(
+      216,
+      173,
+      91,
+      0.5
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CEREMONY PETALS
+========================================================= */
+
+.ceremony-petals {
+  position: absolute;
+
+  z-index: 4;
+
+  width: clamp(
+    120px,
+    16vw,
+    230px
+  );
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  will-change: transform, opacity;
+}
+
+.ceremony-petals img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: none;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 8px 14px
+      rgba(0, 0, 0, 0.35)
+    );
+}
+
+.ceremony-petals-1 {
+  left: 8%;
+  top: 15%;
+}
+
+.ceremony-petals-2 {
+  left: 22%;
+  top: 50%;
+}
+
+.ceremony-petals-3 {
+  right: 8%;
+  top: 20%;
+}
+
+.ceremony-petals-4 {
+  right: 20%;
+  top: 55%;
+}
+
+/* =========================================================
+   CEREMONY BOTTOM MESSAGE
+========================================================= */
+
+.ceremony-bottom {
+  position: absolute;
+
+  left: 50%;
+  bottom: 6%;
+
+  width: min(90%, 600px);
+  max-width: 600px;
+
+  translate: -50% 0;
+
+  z-index: 8;
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+.ceremony-bottom p {
+  color: rgba(
+    248,
+    234,
+    208,
+    0.72
+  );
+
+  font-size: clamp(
+    0.8rem,
+    1.5vw,
+    1.05rem
+  );
+
+  line-height: 1.6;
+
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
    TABLET
 ========================================================= */
 
 @media (max-width: 1024px) {
   .temple-content {
     width: min(92%, 1000px);
-
     padding: 1.5rem;
   }
 
   .temple-content h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(
+      2.5rem,
+      8vw,
+      5rem
+    );
   }
 
   .temple-image {
@@ -937,9 +1427,9 @@ a {
       scale(1.05);
   }
 
-  /* -------------------------------------------------------
-     Couple Tablet
-  ------------------------------------------------------- */
+  /* =======================================================
+     COUPLE TABLET
+  ======================================================= */
 
   .couple-bride {
     width: clamp(
@@ -964,6 +1454,34 @@ a {
       150px
     );
   }
+
+  /* =======================================================
+     CEREMONY TABLET
+  ======================================================= */
+
+  .ceremony-bride {
+    width: clamp(
+      220px,
+      32vw,
+      390px
+    );
+  }
+
+  .ceremony-groom {
+    width: clamp(
+      220px,
+      32vw,
+      390px
+    );
+  }
+
+  .ceremony-garland {
+    width: clamp(
+      100px,
+      12vw,
+      160px
+    );
+  }
 }
 
 /* =========================================================
@@ -972,18 +1490,25 @@ a {
 
 @media (max-width: 768px) {
   /* =======================================================
+     GLOBAL MOBILE
+  ======================================================= */
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* =======================================================
      TEMPLE
   ======================================================= */
 
   .temple-hero {
     min-height: 100svh;
-
     padding: 1rem;
   }
-
-  /* -------------------------------------------------------
-     Mobile Temple Image
-  ------------------------------------------------------- */
 
   .temple-image {
     width: auto;
@@ -1001,10 +1526,6 @@ a {
       scale(1.04);
   }
 
-  /* -------------------------------------------------------
-     Mobile Overlay
-  ------------------------------------------------------- */
-
   .temple-overlay {
     background:
       radial-gradient(
@@ -1021,10 +1542,6 @@ a {
       );
   }
 
-  /* -------------------------------------------------------
-     Mobile Bells
-  ------------------------------------------------------- */
-
   .temple-bell {
     width: 70px;
   }
@@ -1038,10 +1555,6 @@ a {
     top: 10%;
     right: 1%;
   }
-
-  /* -------------------------------------------------------
-     Mobile Flowers
-  ------------------------------------------------------- */
 
   .temple-flowers {
     width: 105px;
@@ -1057,19 +1570,10 @@ a {
     bottom: 3%;
   }
 
-  /* -------------------------------------------------------
-     Mobile Diya
-  ------------------------------------------------------- */
-
   .temple-diya {
     bottom: 4%;
-
     width: 95px;
   }
-
-  /* -------------------------------------------------------
-     Mobile Temple Content
-  ------------------------------------------------------- */
 
   .temple-content {
     left: 50%;
@@ -1138,7 +1642,7 @@ a {
   }
 
   /* =======================================================
-     COUPLE REVEAL - MOBILE
+     COUPLE REVEAL MOBILE
   ======================================================= */
 
   .couple-reveal {
@@ -1146,14 +1650,10 @@ a {
 
     width: 100%;
 
-    padding: 1rem;
+    padding: 0.5rem;
 
     align-items: flex-end;
   }
-
-  /* -------------------------------------------------------
-     Couple Content
-  ------------------------------------------------------- */
 
   .couple-content {
     left: 50%;
@@ -1200,9 +1700,9 @@ a {
     width: 42px;
   }
 
-  /* -------------------------------------------------------
-     Bride
-  ------------------------------------------------------- */
+  /* =======================================================
+     COUPLE BRIDE
+  ======================================================= */
 
   .couple-bride {
     left: -4%;
@@ -1214,9 +1714,9 @@ a {
     max-width: 300px;
   }
 
-  /* -------------------------------------------------------
-     Groom
-  ------------------------------------------------------- */
+  /* =======================================================
+     COUPLE GROOM
+  ======================================================= */
 
   .couple-groom {
     right: -4%;
@@ -1228,14 +1728,9 @@ a {
     max-width: 300px;
   }
 
-  /* -------------------------------------------------------
-     Garland
-     
-     IMPORTANT:
-     `translate` is used instead of `transform`.
-     GSAP can animate transform/y/scale without
-     destroying the horizontal centering.
-  ------------------------------------------------------- */
+  /* =======================================================
+     COUPLE GARLAND
+  ======================================================= */
 
   .couple-garland {
     left: 50%;
@@ -1248,27 +1743,27 @@ a {
     transform: none;
   }
 
-  /* -------------------------------------------------------
-     Glow
-  ------------------------------------------------------- */
+  /* =======================================================
+     COUPLE GLOW
+  ======================================================= */
 
   .couple-glow {
     width: 120vw;
     height: 120vw;
   }
 
-  /* -------------------------------------------------------
-     Particles
-  ------------------------------------------------------- */
+  /* =======================================================
+     COUPLE PARTICLES
+  ======================================================= */
 
   .couple-particles span {
     width: 3px;
     height: 3px;
   }
 
-  /* -------------------------------------------------------
-     Temporary Section
-  ------------------------------------------------------- */
+  /* =======================================================
+     TEMPORARY SECTION
+  ======================================================= */
 
   .test-section {
     min-height: 100svh;
@@ -1280,6 +1775,194 @@ a {
       10vw,
       4rem
     );
+  }
+
+  /* =======================================================
+     CEREMONY MOBILE
+  ======================================================= */
+
+  .garland-ceremony {
+    min-height: 100svh;
+
+    width: 100%;
+
+    padding: 0;
+
+    overflow: hidden;
+  }
+
+  /* =======================================================
+     CEREMONY CONTENT
+  ======================================================= */
+
+  .ceremony-content {
+    top: 7%;
+
+    left: 50%;
+
+    width: 92%;
+
+    max-width: 600px;
+
+    translate: -50% 0;
+
+    padding: 0;
+  }
+
+  .ceremony-eyebrow {
+    margin-bottom: 0.75rem;
+
+    font-size: 0.62rem;
+
+    letter-spacing: 0.14em;
+
+    line-height: 1.4;
+  }
+
+  .ceremony-content h2 {
+    font-size: clamp(
+      2rem,
+      9vw,
+      3.3rem
+    );
+
+    line-height: 1.08;
+  }
+
+  .ceremony-divider {
+    margin-top: 1.1rem;
+
+    gap: 8px;
+  }
+
+  .ceremony-divider span {
+    width: 45px;
+  }
+
+  /* =======================================================
+     CEREMONY BRIDE
+  ======================================================= */
+
+  .ceremony-bride {
+    left: -10%;
+
+    bottom: 0;
+
+    width: 58vw;
+
+    max-width: 280px;
+  }
+
+  /* =======================================================
+     CEREMONY GROOM
+  ======================================================= */
+
+  .ceremony-groom {
+    right: -10%;
+
+    bottom: 0;
+
+    width: 58vw;
+
+    max-width: 280px;
+  }
+
+  /* =======================================================
+     CEREMONY GARLAND
+     TRUE CENTER
+  ======================================================= */
+
+  .ceremony-garland {
+    left: 50%;
+    top: 53%;
+
+    width: 90px;
+
+    translate: -50% -50%;
+
+    transform: none;
+  }
+
+  .ceremony-symbol {
+    top: 30%;
+
+    font-size: 1.5rem;
+  }
+
+  /* =======================================================
+     CEREMONY PETALS
+  ======================================================= */
+
+  .ceremony-petals {
+    width: 95px;
+  }
+
+  .ceremony-petals-1 {
+    left: 2%;
+    top: 18%;
+  }
+
+  .ceremony-petals-2 {
+    left: 12%;
+    top: 52%;
+  }
+
+  .ceremony-petals-3 {
+    right: 2%;
+    top: 23%;
+  }
+
+  .ceremony-petals-4 {
+    right: 10%;
+    top: 55%;
+  }
+
+  /* =======================================================
+     CEREMONY BOTTOM
+  ======================================================= */
+
+  .ceremony-bottom {
+    left: 50%;
+
+    bottom: 5%;
+
+    width: 88%;
+
+    translate: -50% 0;
+  }
+
+  .ceremony-bottom p {
+    font-size: 0.78rem;
+
+    line-height: 1.5;
+  }
+
+  /* =======================================================
+     CEREMONY GLOW
+  ======================================================= */
+
+  .ceremony-glow {
+    width: 120vw;
+    height: 120vw;
+
+    top: 55%;
+  }
+
+  /* =======================================================
+     CEREMONY LIGHTS
+  ======================================================= */
+
+  .ceremony-light {
+    width: 150px;
+    height: 150px;
+  }
+
+  .ceremony-light-left {
+    left: -70px;
+  }
+
+  .ceremony-light-right {
+    right: -70px;
   }
 }
 
@@ -1416,10 +2099,6 @@ a {
     max-width: 285px;
   }
 
-  /* -------------------------------------------------------
-     Garland
-  ------------------------------------------------------- */
-
   .couple-garland {
     left: 50%;
     top: 50%;
@@ -1429,6 +2108,110 @@ a {
     translate: -50% -50%;
 
     transform: none;
+  }
+
+  /* =======================================================
+     CEREMONY
+  ======================================================= */
+
+  .ceremony-content {
+    top: 6.5%;
+
+    width: 92%;
+  }
+
+  .ceremony-eyebrow {
+    font-size: 0.58rem;
+
+    letter-spacing: 0.11em;
+  }
+
+  .ceremony-content h2 {
+    font-size: 1.85rem;
+
+    line-height: 1.08;
+  }
+
+  .ceremony-divider {
+    margin-top: 0.9rem;
+  }
+
+  .ceremony-divider span {
+    width: 38px;
+  }
+
+  .ceremony-bride {
+    left: -15%;
+
+    width: 61vw;
+
+    max-width: 270px;
+  }
+
+  .ceremony-groom {
+    right: -15%;
+
+    width: 61vw;
+
+    max-width: 270px;
+  }
+
+  .ceremony-garland {
+    left: 50%;
+    top: 53%;
+
+    width: 76px;
+
+    translate: -50% -50%;
+
+    transform: none;
+  }
+
+  .ceremony-symbol {
+    top: 29%;
+
+    font-size: 1.35rem;
+  }
+
+  .ceremony-petals {
+    width: 72px;
+  }
+
+  .ceremony-petals-1 {
+    left: 1%;
+    top: 18%;
+  }
+
+  .ceremony-petals-2 {
+    left: 8%;
+    top: 52%;
+  }
+
+  .ceremony-petals-3 {
+    right: 1%;
+    top: 23%;
+  }
+
+  .ceremony-petals-4 {
+    right: 7%;
+    top: 55%;
+  }
+
+  .ceremony-bottom {
+    bottom: 4%;
+
+    width: 88%;
+  }
+
+  .ceremony-bottom p {
+    font-size: 0.7rem;
+
+    line-height: 1.5;
+  }
+
+  .ceremony-glow {
+    width: 130vw;
+    height: 130vw;
   }
 }
 
@@ -1536,6 +2319,81 @@ a {
 
     transform: none;
   }
+
+  /* =======================================================
+     CEREMONY
+  ======================================================= */
+
+  .ceremony-content {
+    top: 6%;
+  }
+
+  .ceremony-eyebrow {
+    font-size: 0.54rem;
+
+    letter-spacing: 0.08em;
+  }
+
+  .ceremony-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .ceremony-divider {
+    width: 120px;
+
+    margin-top: 0.8rem;
+  }
+
+  .ceremony-divider span {
+    width: 32px;
+  }
+
+  .ceremony-bride {
+    left: -18%;
+
+    width: 64vw;
+
+    max-width: 220px;
+  }
+
+  .ceremony-groom {
+    right: -18%;
+
+    width: 64vw;
+
+    max-width: 220px;
+  }
+
+  .ceremony-garland {
+    left: 50%;
+    top: 53%;
+
+    width: 68px;
+
+    translate: -50% -50%;
+
+    transform: none;
+  }
+
+  .ceremony-symbol {
+    top: 29%;
+
+    font-size: 1.2rem;
+  }
+
+  .ceremony-petals {
+    width: 60px;
+  }
+
+  .ceremony-bottom {
+    bottom: 3%;
+
+    width: 90%;
+  }
+
+  .ceremony-bottom p {
+    font-size: 0.64rem;
+  }
 }
 
 /* =========================================================
@@ -1569,6 +2427,68 @@ a {
     top: 50%;
 
     width: 75px;
+  }
+
+  /* =======================================================
+     CEREMONY LANDSCAPE
+  ======================================================= */
+
+  .ceremony-content {
+    top: 4%;
+  }
+
+  .ceremony-content h2 {
+    font-size: clamp(
+      1.4rem,
+      5vw,
+      2.4rem
+    );
+  }
+
+  .ceremony-bride {
+    width: 42vh;
+    max-width: 230px;
+  }
+
+  .ceremony-groom {
+    width: 42vh;
+    max-width: 230px;
+  }
+
+  .ceremony-garland {
+    top: 52%;
+
+    width: 70px;
+  }
+
+  .ceremony-bottom {
+    bottom: 2%;
+  }
+
+  .ceremony-bottom p {
+    font-size: 0.65rem;
+  }
+}
+
+/* =========================================================
+   DESKTOP LARGE SCREENS
+========================================================= */
+
+@media (min-width: 1440px) {
+  .couple-bride {
+    left: 4%;
+  }
+
+  .couple-groom {
+    right: 4%;
+  }
+
+  .ceremony-bride {
+    left: 4%;
+  }
+
+  .ceremony-groom {
+    right: 4%;
   }
 }
 

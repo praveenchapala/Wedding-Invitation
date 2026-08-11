@@ -76,13 +76,13 @@ function App() {
       <WeddingCardReveal />
 
       {/* =================================================
-          SECTION 10 — VENUE LOCATION
+          SECTION 11 — VENUE LOCATION
       ================================================= */}
 
       <VenueLocation />
 
       {/* =================================================
-          SECTION 11 — FINAL FOOTER
+          SECTION 12 — FINAL FOOTER
       ================================================= */}
 
       <Footer />

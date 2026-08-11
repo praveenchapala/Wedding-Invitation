@@ -8,10 +8,17 @@ import RSVP from "./components/RSVP";
 import CoupleMemories from "./components/CoupleMemories";
 import VenueLocation from "./components/VenueLocation";
 import Footer from "./components/Footer";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
   return (
     <div>
+
+      {/* =================================================
+          WEDDING MUSIC
+      ================================================= */}
+
+      <MusicPlayer />
 
       {/* =================================================
           SECTION 1 — TEMPLE HERO

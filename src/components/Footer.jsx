@@ -251,28 +251,7 @@ function Footer() {
             Chapala Praveen
           </strong>
         </p>
-
-      </div>
-
-      {/* =================================================
-          BOTTOM LINE
-      ================================================= */}
-
-      <div className="wedding-footer-bottom">
-
-        <span>
-          26 · 08 · 2026
-        </span>
-
-        <span>
-          ✦
-        </span>
-
-        <span>
-          With Love
-        </span>
-
-      </div>
+</div>
     </footer>
   );
 }

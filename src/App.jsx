@@ -6,6 +6,7 @@ import Countdown from "./components/Countdown";
 import FamilyBlessings from "./components/FamilyBlessings";
 import RSVP from "./components/RSVP";
 import CoupleMemories from "./components/CoupleMemories";
+import WeddingCardReveal from "./components/WeddingCardReveal";
 import VenueLocation from "./components/VenueLocation";
 import Footer from "./components/Footer";
 import MusicPlayer from "./components/MusicPlayer";
@@ -69,13 +70,19 @@ function App() {
       <CoupleMemories />
 
       {/* =================================================
-          SECTION 9 — VENUE LOCATION
+          SECTION 9 — WEDDING CARD REVEAL
+      ================================================= */}
+
+      <WeddingCardReveal />
+
+      {/* =================================================
+          SECTION 10 — VENUE LOCATION
       ================================================= */}
 
       <VenueLocation />
 
       {/* =================================================
-          SECTION 10 — FINAL FOOTER
+          SECTION 11 — FINAL FOOTER
       ================================================= */}
 
       <Footer />

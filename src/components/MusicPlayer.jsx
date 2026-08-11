@@ -9,37 +9,84 @@ function MusicPlayer() {
     if (!audio) return;
 
     audio.volume = 0.45;
+    audio.loop = true;
 
-    const startMusic = async () => {
+    let started = false;
+
+    const playMusic = async () => {
+      if (started) return;
+
       try {
         await audio.play();
-      } catch {
-        // Browser blocked autoplay.
-        // Start automatically on the first user interaction.
+
+        started = true;
+
+        removeInteractionListeners();
+
+        console.log("Wedding music started");
+      } catch (error) {
+        console.log(
+          "Autoplay blocked. Waiting for user interaction."
+        );
       }
     };
 
-    const handleFirstInteraction = () => {
-      audio.play().catch(() => {});
-      removeListeners();
+    const handleInteraction = () => {
+      playMusic();
     };
 
-    const removeListeners = () => {
-      window.removeEventListener("click", handleFirstInteraction);
-      window.removeEventListener("touchstart", handleFirstInteraction);
-      window.removeEventListener("keydown", handleFirstInteraction);
+    const removeInteractionListeners = () => {
+      window.removeEventListener(
+        "pointerdown",
+        handleInteraction,
+        true
+      );
+
+      window.removeEventListener(
+        "touchend",
+        handleInteraction,
+        true
+      );
+
+      window.removeEventListener(
+        "click",
+        handleInteraction,
+        true
+      );
     };
 
-    // Try to start immediately when the website opens.
-    startMusic();
+    /*
+     * Try autoplay immediately.
+     */
+    playMusic();
 
-    // Fallback for browsers that block autoplay.
-    window.addEventListener("click", handleFirstInteraction);
-    window.addEventListener("touchstart", handleFirstInteraction);
-    window.addEventListener("keydown", handleFirstInteraction);
+    /*
+     * Mobile fallback.
+     *
+     * Capture phase is important because it catches
+     * the user's first interaction even if another
+     * element handles the event.
+     */
+    window.addEventListener(
+      "pointerdown",
+      handleInteraction,
+      true
+    );
+
+    window.addEventListener(
+      "touchend",
+      handleInteraction,
+      true
+    );
+
+    window.addEventListener(
+      "click",
+      handleInteraction,
+      true
+    );
 
     return () => {
-      removeListeners();
+      removeInteractionListeners();
     };
   }, []);
 
@@ -47,8 +94,9 @@ function MusicPlayer() {
     <audio
       ref={audioRef}
       src="/music/wedding-invitation.mp3"
-      loop
       preload="auto"
+      loop
+      playsInline
     />
   );
 }

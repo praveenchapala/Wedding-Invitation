@@ -31,7 +31,7 @@ function WeddingCardReveal() {
 
       <div className="wedding-card-header">
         <p className="wedding-card-eyebrow">
-          
+          A Special Invitation
         </p>
 
         <h2>

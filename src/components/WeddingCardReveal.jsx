@@ -35,10 +35,10 @@ function WeddingCardReveal() {
         </p>
 
         <h2>
-          A Gift From
-          <br />
-          The Heart
-        </h2>
+  Our Wedding
+  <br />
+  Invitation
+</h2>
 
         <div className="wedding-card-divider">
           <span />

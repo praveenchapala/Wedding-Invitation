@@ -47,7 +47,7 @@ function WeddingCardReveal() {
         </div>
 
         <p className="wedding-card-instruction">
-          
+          Scroll To Reveal
         </p>
       </div>
 

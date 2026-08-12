@@ -103,7 +103,7 @@ function WeddingCardReveal() {
             </p>
 
             <small>
-              
+              C. Chandra Mouli & B.Kalyani
             </small>
 
           </div>

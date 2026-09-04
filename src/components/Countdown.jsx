@@ -218,8 +218,7 @@ function Countdown() {
         ================================================= */}
 
         <p className="countdown-message">
-          Every moment brings us closer
-          to the beginning of forever.
+          
         </p>
 
       </div>

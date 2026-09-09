@@ -175,7 +175,7 @@ function Countdown() {
             </div>
 
             <div className="countdown-label">
-              Hours
+              
             </div>
           </div>
 

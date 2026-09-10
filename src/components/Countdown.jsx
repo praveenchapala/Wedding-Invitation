@@ -191,7 +191,7 @@ function Countdown() {
             </div>
 
             <div className="countdown-label">
-              
+              Minutes
             </div>
           </div>
 

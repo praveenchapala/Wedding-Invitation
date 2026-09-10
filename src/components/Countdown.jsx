@@ -159,7 +159,7 @@ function Countdown() {
             </div>
 
             <div className="countdown-label">
-              Days
+              
             </div>
           </div>
 
